@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig: any = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "**" },
@@ -8,11 +8,9 @@ const nextConfig: NextConfig = {
     qualities: [75, 100],
   },
   eslint: {
-    // Vercel pe eslint errors build fail na kare
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Type errors pe build fail na ho Vercel pe
     ignoreBuildErrors: false,
   },
   async headers() {

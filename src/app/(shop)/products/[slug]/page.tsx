@@ -51,7 +51,7 @@ export default async function ProductPage({ params }: PageProps) {
 
   const description = productDescriptions[product.id] || "Premium eyewear handcrafted for ultimate clarity, comfort, and luxury style.";
   const brandName = ("brand" in product && product.brand) ? product.brand : "OPTICS";
-  const colorsList = product.colors || ["#111", "#c5a880"];
+  const colorsList = ("colors" in product && product.colors) ? product.colors : ["#111", "#c5a880"];
 
   return (
     <div className="min-h-[70vh] bg-[#faf9f6]">
@@ -119,7 +119,7 @@ export default async function ProductPage({ params }: PageProps) {
                 Colour Options
               </span>
               <div className="flex gap-2.5">
-                {colorsList.map((color) => (
+                {colorsList.map((color: string) => (
                   <span
                     key={color}
                     className="w-8 h-8 rounded-full border border-gray-200 ring-1 ring-offset-1 ring-luxury-black"
