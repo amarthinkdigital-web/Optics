@@ -1,7 +1,7 @@
 export default function LuxuryPromo() {
   return (
-    <section className="mx-auto max-w-7xl w-full px-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
-      <div className="md:col-span-8 rounded-3xl bg-neutral-900 text-white p-8 md:p-12 flex flex-col justify-between min-h-[360px] relative overflow-hidden group">
+    <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+      <div className="md:col-span-8 rounded-3xl bg-neutral-900 text-white p-6 sm:p-8 md:p-12 flex flex-col justify-between min-h-[320px] md:min-h-[360px] relative overflow-hidden group">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_right,_var(--tw-gradient-stops))] from-neutral-800 via-neutral-900 to-neutral-950 -z-10" />
         <div className="max-w-md flex flex-col gap-4">
           <span className="text-[10px] font-bold tracking-widest uppercase text-luxury-gold">Signature Packaging</span>
@@ -17,7 +17,7 @@ export default function LuxuryPromo() {
         </button>
       </div>
 
-      <div className="md:col-span-4 rounded-3xl border border-luxury-gold/20 bg-luxury-gold/5 p-8 flex flex-col justify-between min-h-[360px] group">
+      <div className="md:col-span-4 rounded-3xl border border-luxury-gold/20 bg-luxury-gold/5 p-6 sm:p-8 flex flex-col justify-between min-h-[320px] md:min-h-[360px] group">
         <div className="flex flex-col gap-4">
           <span className="text-[10px] font-bold tracking-widest uppercase text-luxury-gold-dark">Bespoke Concierge</span>
           <h3 className="font-display text-2xl font-bold tracking-tight text-luxury-black">

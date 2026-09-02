@@ -9,6 +9,9 @@ export interface CartLine {
 
 const STORAGE_KEY = "optics-cart";
 
+const EMPTY_LINES: CartLine[] = [];
+const SERVER_SNAPSHOT = () => EMPTY_LINES;
+
 const listeners = new Set<() => void>();
 
 let lines: CartLine[] = (() => {
@@ -80,7 +83,11 @@ function reset() {
 }
 
 export function useCart() {
-  const currentLines = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+  const currentLines = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    SERVER_SNAPSHOT
+  );
   const count = currentLines.reduce((sum, l) => sum + l.quantity, 0);
   return {
     lines: currentLines,

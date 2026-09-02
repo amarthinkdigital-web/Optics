@@ -55,8 +55,8 @@ export default async function ProductPage({ params }: PageProps) {
 
   return (
     <div className="min-h-[70vh] bg-[#faf9f6]">
-      <div className="mx-auto max-w-7xl w-full px-6 py-8">
-        <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-8">
+      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 py-6 sm:py-8">
+        <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-6 sm:mb-8 overflow-x-auto scrollbar-none whitespace-nowrap">
           <Link href="/" className="hover:text-luxury-black">Home</Link>
           <span>/</span>
           <Link href="/products" className="hover:text-luxury-black">Shop All</Link>
@@ -64,9 +64,9 @@ export default async function ProductPage({ params }: PageProps) {
           <span className="text-luxury-black">{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
           {/* Gallery */}
-          <div className="relative">
+          <div className="relative -mx-4 sm:mx-0">
             {"tag" in product && product.tag && (
               <span className={`absolute top-5 left-5 z-20 px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full ${
                 product.tag === "Sale" ? "bg-red-500 text-white" :
@@ -94,16 +94,16 @@ export default async function ProductPage({ params }: PageProps) {
               <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
                 {brandName}
               </span>
-              <h1 className="font-display text-3xl font-bold tracking-tight text-luxury-black">
+              <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black">
                 {product.name}
               </h1>
               <div className="flex items-center gap-3">
                 {"oldPrice" in product && product.oldPrice && (
-                  <span className="text-base text-gray-400 line-through">
+                  <span className="text-sm sm:text-base text-gray-400 line-through">
                     {product.oldPrice}
                   </span>
                 )}
-                <span className="text-xl font-bold text-luxury-black">
+                <span className="text-lg sm:text-xl font-bold text-luxury-black">
                   {product.price}
                 </span>
               </div>

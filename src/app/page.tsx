@@ -27,10 +27,10 @@ export default function Home() {
   }, [handleScroll]);
 
   return (
-    <div className="flex flex-col gap-16 md:gap-24 pb-20 bg-[#faf9f6]">
+    <div className="flex flex-col gap-16 md:gap-24 pb-20 bg-[#faf9f6] overflow-x-hidden">
       <HeroSection />
-      <VirtualTryOnSection />
       <TrendingSection />
+      <VirtualTryOnSection />
       <EditorialLookbook />
       <FullCatalog
         catalogRef={catalogRef}

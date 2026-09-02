@@ -17,9 +17,9 @@ export default function VirtualTryOnSection() {
   };
 
   return (
-    <section className="mx-auto max-w-7xl w-full px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+    <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
       {/* Left Column: Interactive Virtual Try-On Studio */}
-      <div className="lg:col-span-4 rounded-[2px] border border-gray-200/80 bg-white p-6 md:p-8 flex flex-col justify-between gap-6 shadow-sm">
+      <div className="lg:col-span-4 rounded-[2px] border border-gray-200/80 bg-white p-5 md:p-8 flex flex-col justify-between gap-6 shadow-sm">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-[#c5a880] animate-ping" />
@@ -84,7 +84,7 @@ export default function VirtualTryOnSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6" id="collection">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6" id="collection">
           {products.slice(0, 3).map((product) => (
             <div
               key={product.id}

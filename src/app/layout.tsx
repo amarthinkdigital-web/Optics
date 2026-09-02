@@ -1,5 +1,5 @@
 ﻿import type { Metadata } from "next";
-import { Navbar, Footer } from "@/components/layout";
+import { Navbar, Footer, WhatsAppButton } from "@/components/layout";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,8 +16,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen antialiased">
         <Navbar />
-        <main>{children}</main>
+        <main className="pt-20">{children}</main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

@@ -13,13 +13,17 @@ interface FullCatalogProps {
   stickyBar: boolean;
 }
 
+const INITIAL_VISIBLE = 8;
+
 export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps) {
   const router = useRouter();
   const { addItem } = useCart();
   const [catalogCategory, setCatalogCategory] = useState<string>("all");
   const [selectedColors, setSelectedColors] = useState<Record<string, number>>({});
+  const [showAll, setShowAll] = useState(false);
 
   const filteredCatalog = catalogProducts.filter(p => p.categories.includes(catalogCategory));
+  const visibleCatalog = showAll ? filteredCatalog : filteredCatalog.slice(0, INITIAL_VISIBLE);
 
   const handleQuickAdd = (id: string) => {
     addItem(id, 1);
@@ -34,12 +38,12 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
         ref={catTabsRef}
         className={`w-full z-40 transition-all duration-300 ${
           stickyBar
-            ? "fixed top-16 left-0 right-0 shadow-lg bg-white/95 backdrop-blur-md border-b border-gray-200"
+            ? "fixed top-20 left-0 right-0 shadow-lg bg-white/95 backdrop-blur-md border-b border-gray-200"
             : "relative bg-white"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-6 py-4">
-          <div className="flex items-center justify-center gap-2 flex-wrap">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none pb-1">
             {catalogCategories.map((cat) => (
               <button
                 key={cat.id}
@@ -59,10 +63,10 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
 
       {stickyBar && <div className="h-[60px]" />}
 
-      <section className="mx-auto max-w-7xl w-full px-6 flex flex-col gap-10">
+      <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 flex flex-col gap-6 sm:gap-10">
         <div className="flex flex-col gap-2 pt-2">
           <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Curated Optics</span>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-luxury-black">
+          <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black">
             Full Catalog
           </h2>
           <p className="text-xs text-gray-400">
@@ -70,8 +74,8 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredCatalog.map((product) => {
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+          {visibleCatalog.map((product) => {
             const activeColorIdx = selectedColors[product.id] || 0;
             const productSlug = slugify(product.name);
             return (
@@ -151,6 +155,17 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
             );
           })}
         </div>
+
+        {filteredCatalog.length > INITIAL_VISIBLE && (
+          <div className="flex justify-center pt-4">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-8 py-3 bg-luxury-black text-white text-[10px] font-bold tracking-widest uppercase rounded-full hover:bg-luxury-gold transition-colors duration-300 shadow-md"
+            >
+              {showAll ? "Show Less" : "View All"}
+            </button>
+          </div>
+        )}
       </section>
     </>
   );

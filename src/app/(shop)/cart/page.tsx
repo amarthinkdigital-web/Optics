@@ -35,8 +35,8 @@ export default function CartPage() {
 
   return (
     <div className="min-h-[60vh] bg-[#faf9f6]">
-      <div className="mx-auto max-w-5xl w-full px-6 py-12 flex flex-col gap-8">
-        <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+      <div className="mx-auto max-w-5xl w-full px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
+        <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400 overflow-x-auto scrollbar-none whitespace-nowrap">
           <Link href="/" className="hover:text-luxury-black">Home</Link>
           <span>/</span>
           <span className="text-luxury-black">Cart</span>
@@ -46,7 +46,7 @@ export default function CartPage() {
           <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
             Your Selection
           </span>
-          <h1 className="font-display text-3xl font-bold tracking-tight text-luxury-black uppercase">
+          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black uppercase">
             Shopping Cart
           </h1>
         </div>
@@ -65,13 +65,13 @@ export default function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
             {/* Items */}
             <div className="lg:col-span-2 flex flex-col gap-4">
               {items.map(({ product, quantity, detailsHref }) => (
                 <div
                   key={product.id}
-                  className="flex gap-4 p-4 bg-white border border-gray-200/60 rounded-2xl"
+                  className="flex gap-3 sm:gap-4 p-4 bg-white border border-gray-200/60 rounded-2xl"
                 >
                   {detailsHref ? (
                     <Link
@@ -180,7 +180,7 @@ export default function CartPage() {
               </div>
               <Link
                 href="/checkout"
-                className="w-full py-3.5 rounded-full bg-luxury-black text-white text-xs font-black uppercase tracking-widest hover:bg-luxury-gold transition-colors duration-300"
+                className="w-full py-3.5 rounded-full bg-luxury-black text-white text-xs font-black uppercase tracking-widest text-center hover:bg-luxury-gold transition-colors duration-300"
               >
                 Proceed to Checkout
               </Link>
