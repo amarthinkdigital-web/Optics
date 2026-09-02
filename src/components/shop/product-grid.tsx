@@ -33,12 +33,12 @@ export default function ProductGrid({
       : catalogProducts.filter((p) => p.categories.includes(catalogCategory));
 
   return (
-    <div className="mx-auto max-w-7xl w-full px-6 flex flex-col gap-8 py-10">
+    <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 flex flex-col gap-8 py-8 sm:py-10">
       <div className="flex flex-col gap-2">
         <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
           Curated Optics
         </span>
-        <h2 className="font-display text-3xl font-bold tracking-tight text-luxury-black uppercase">
+        <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black uppercase">
           {heading}
         </h2>
         <p className="text-xs text-gray-400">
@@ -47,12 +47,12 @@ export default function ProductGrid({
         {subheading && <p className="text-xs text-gray-500">{subheading}</p>}
       </div>
 
-      <div className="flex items-center justify-center gap-2 flex-wrap">
+      <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none pb-1">
         {catalogCategories.map((cat) => (
           <button
             key={cat.id}
             onClick={() => setCatalogCategory(cat.id)}
-            className={`px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
+            className={`px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap shrink-0 ${
               catalogCategory === cat.id
                 ? "bg-luxury-black text-white shadow-md"
                 : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-luxury-black"
@@ -63,7 +63,7 @@ export default function ProductGrid({
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {activeFilter.map((product) => {
           const slug = slugify(product.name);
           return (

@@ -52,9 +52,9 @@ export default function Footer() {
               <Image
                 src="/images/logo.webp"
                 alt="Optics Logo"
-                width={170}
+                width={240}
                 height={50}
-                className="h-10 w-auto object-contain brightness-0 invert"
+                className="h-20 w-auto object-contain brightness-0 invert"
               />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">

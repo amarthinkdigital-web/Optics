@@ -14,8 +14,8 @@ export default function EditorialLookbook() {
         {/* Row 1 */}
         <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden group">
           <Image src="/images/hero_model.png" alt="Editorial Model" fill className="object-cover group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
-          <div className="absolute inset-x-0 bottom-4 flex justify-center z-10 pointer-events-none select-none">
-            <span className="font-display text-xl sm:text-2xl font-extrabold tracking-widest text-white uppercase drop-shadow-md">OPTICS</span>
+          <div className="absolute inset-x-0 bottom-3 sm:bottom-4 flex justify-center z-10 pointer-events-none select-none">
+            <span className="font-display text-sm sm:text-2xl font-extrabold tracking-widest text-white uppercase drop-shadow-md">OPTICS</span>
           </div>
           <div className="absolute inset-0 bg-black/5" />
         </div>
@@ -28,8 +28,8 @@ export default function EditorialLookbook() {
 
         <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden group">
           <Image src="/images/tryon_model.png" alt="Editorial Model" fill className="object-cover filter brightness-[0.97] saturate-[0.8] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
-          <div className="absolute inset-x-0 bottom-4 flex justify-center z-10 pointer-events-none select-none">
-            <span className="font-display text-xl sm:text-2xl font-extrabold tracking-widest text-white/90 uppercase drop-shadow-md">OPTICS</span>
+          <div className="absolute inset-x-0 bottom-3 sm:bottom-4 flex justify-center z-10 pointer-events-none select-none">
+            <span className="font-display text-sm sm:text-2xl font-extrabold tracking-widest text-white/90 uppercase drop-shadow-md">OPTICS</span>
           </div>
           <div className="absolute inset-0 bg-black/5" />
         </div>

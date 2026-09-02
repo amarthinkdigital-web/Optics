@@ -70,8 +70,8 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-[60vh] bg-[#faf9f6]">
-      <div className="mx-auto max-w-6xl w-full px-6 py-12 flex flex-col gap-8">
-        <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+      <div className="mx-auto max-w-6xl w-full px-4 sm:px-6 py-8 sm:py-12 flex flex-col gap-8">
+        <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400 overflow-x-auto scrollbar-none whitespace-nowrap">
           <Link href="/" className="hover:text-luxury-black">Home</Link>
           <span>/</span>
           <Link href="/cart" className="hover:text-luxury-black">Cart</Link>
@@ -83,15 +83,15 @@ export default function CheckoutPage() {
           <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
             Almost There
           </span>
-          <h1 className="font-display text-3xl font-bold tracking-tight text-luxury-black uppercase">
+          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black uppercase">
             Checkout
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
           {/* Form */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            <section className="flex flex-col gap-4 bg-white border border-gray-200/60 rounded-2xl p-6">
+            <section className="flex flex-col gap-4 bg-white border border-gray-200/60 rounded-2xl p-5 sm:p-6">
               <h2 className="font-display text-sm font-bold text-luxury-black uppercase">
                 Shipping Address
               </h2>
@@ -142,7 +142,7 @@ export default function CheckoutPage() {
               </div>
             </section>
 
-            <section className="flex flex-col gap-4 bg-white border border-gray-200/60 rounded-2xl p-6">
+            <section className="flex flex-col gap-4 bg-white border border-gray-200/60 rounded-2xl p-5 sm:p-6">
               <h2 className="font-display text-sm font-bold text-luxury-black uppercase">
                 Payment
               </h2>
@@ -203,7 +203,7 @@ export default function CheckoutPage() {
             <button
               onClick={handlePlaceOrder}
               disabled={placing}
-              className="w-full py-3.5 rounded-full bg-luxury-black text-white text-xs font-black uppercase tracking-widest hover:bg-luxury-gold transition-colors disabled:opacity-60"
+              className="w-full py-3.5 rounded-full bg-luxury-black text-white text-xs font-black uppercase tracking-widest text-center hover:bg-luxury-gold transition-colors disabled:opacity-60"
             >
               {placing ? "Placing Order..." : "Place Order"}
             </button>

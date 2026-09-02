@@ -18,28 +18,28 @@ export default function TrendingSection() {
 
   const scrollLeft = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -320, behavior: "smooth" });
+      sliderRef.current.scrollBy({ left: -280, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: 320, behavior: "smooth" });
+      sliderRef.current.scrollBy({ left: 280, behavior: "smooth" });
     }
   };
 
   return (
-    <section className="mx-auto max-w-7xl w-full px-6 flex flex-col gap-6">
+    <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 flex flex-col gap-4 sm:gap-6">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
           <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
             Weekly Highlights
           </span>
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-luxury-black uppercase">
+          <h2 className="font-display text-xl sm:text-2xl font-extrabold tracking-tight text-luxury-black uppercase">
             Trending This Week
           </h2>
         </div>
-        <div className="flex gap-2">
+        <div className="hidden sm:flex gap-2">
           <button
             onClick={scrollLeft}
             aria-label="Scroll Left"
@@ -59,7 +59,7 @@ export default function TrendingSection() {
 
       <div
         ref={sliderRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 pt-2 scrollbar-none"
+        className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 sm:pb-6 pt-2 scrollbar-none"
       >
         {trendingProducts.map((product) => {
           const productSlug = slugify(product.name);
@@ -67,33 +67,33 @@ export default function TrendingSection() {
             <div
               key={product.id}
               onClick={() => router.push(`/products/${productSlug}`)}
-              className={`snap-start shrink-0 w-[275px] h-[420px] rounded-[32px] relative overflow-hidden flex flex-col justify-between p-6 ${product.bgStyle} group shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer`}
+              className={`snap-start shrink-0 w-[220px] sm:w-[275px] h-[340px] sm:h-[420px] rounded-[24px] sm:rounded-[32px] relative overflow-hidden flex flex-col justify-between p-4 sm:p-6 ${product.bgStyle} group shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer`}
             >
               {/* Top: Name & Tagline */}
               <div className="relative z-10 flex flex-col gap-1">
-                <h3 className={`font-display font-extrabold text-2xl tracking-widest leading-none ${product.textColor}`}>
+                <h3 className={`font-display font-extrabold text-lg sm:text-2xl tracking-widest leading-none ${product.textColor}`}>
                   {product.name}
                 </h3>
-                <span className={`text-[9px] font-bold tracking-[0.2em] ${product.tagColor}`}>
+                <span className={`text-[8px] sm:text-[9px] font-bold tracking-[0.2em] ${product.tagColor}`}>
                   {product.tagline}
                 </span>
               </div>
 
               {/* Center: Product Image */}
-              <div className="absolute inset-0 flex items-center justify-center p-6">
+              <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
                 <div className="relative w-[85%] aspect-square group-hover:scale-110 transition-transform duration-[6000ms] ease-out filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.3)]">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    sizes="275px"
+                    sizes="220px"
                     className="object-contain"
                   />
                 </div>
               </div>
 
               {/* Bottom: Price & Cart */}
-              <div className="relative z-10 w-full bg-white/95 backdrop-blur-md rounded-2xl p-3 flex items-center justify-between shadow-lg">
+              <div className="relative z-10 w-full bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 flex items-center justify-between shadow-lg">
                 <div className="flex flex-col">
                   <span className="text-[11px] font-extrabold text-luxury-black leading-none">
                     {product.price}
@@ -102,7 +102,7 @@ export default function TrendingSection() {
                     <span className="text-[9px] text-gray-400 line-through">
                       {product.oldPrice}
                     </span>
-                    <span className="text-[9px] font-extrabold text-red-500 bg-red-50 px-1 rounded">
+                    <span className="text-[8px] font-extrabold text-red-500 bg-red-50 px-1 rounded">
                       {product.discount}
                     </span>
                   </div>
@@ -113,7 +113,7 @@ export default function TrendingSection() {
                     handleAdd(product.id);
                   }}
                   aria-label="Add to cart"
-                  className="w-8 h-8 rounded-full bg-luxury-black text-white hover:bg-luxury-gold transition-colors duration-300 flex items-center justify-center shadow-sm"
+                  className="w-8 h-8 rounded-full bg-luxury-black text-white hover:bg-luxury-gold transition-colors duration-300 flex items-center justify-center shadow-sm shrink-0"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
