@@ -83,6 +83,7 @@ export default function Footer() {
                 { label: "Full Catalog", href: "/#catalog" },
                 { label: "Most Loved Frames", href: "/#favorites" },
                 { label: "Editorial Lookbook", href: "/#editorial" },
+                { label: "Cinematic Video", href: "/#video" },
                 { label: "Special Promo", href: "/#promo" },
               ].map((link) => (
                 <li key={link.label}>

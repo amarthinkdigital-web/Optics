@@ -5,6 +5,7 @@ import HeroSection from "@/components/home/hero-section";
 import VirtualTryOnSection from "@/components/home/virtual-tryon-section";
 import TrendingSection from "@/components/home/trending-section";
 import EditorialLookbook from "@/components/home/editorial-lookbook";
+import VideoSection from "@/components/home/video-section";
 import FullCatalog from "@/components/home/full-catalog";
 import LuxuryPromo from "@/components/home/luxury-promo";
 
@@ -27,7 +28,7 @@ export default function Home() {
   }, [handleScroll]);
 
   return (
-    <div className="flex flex-col pb-20 bg-[#faf9f6]">
+    <div className="flex flex-col pb-20 bg-[#faf9f6] w-full max-w-full overflow-x-hidden">
       <HeroSection />
       <div className="mt-4 md:mt-12" id="trending">
         <TrendingSection />
@@ -44,6 +45,9 @@ export default function Home() {
       </div>
       <div className="mt-16 md:mt-24" id="editorial">
         <EditorialLookbook />
+      </div>
+      <div className="mt-16 md:mt-24" id="video">
+        <VideoSection />
       </div>
       <div className="mt-16 md:mt-24" id="promo">
         <LuxuryPromo />
