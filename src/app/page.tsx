@@ -7,7 +7,6 @@ import TrendingSection from "@/components/home/trending-section";
 import EditorialLookbook from "@/components/home/editorial-lookbook";
 import VideoSection from "@/components/home/video-section";
 import FullCatalog from "@/components/home/full-catalog";
-import LuxuryPromo from "@/components/home/luxury-promo";
 
 export default function Home() {
   const [stickyBar, setStickyBar] = useState(false);
