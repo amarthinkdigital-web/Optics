@@ -18,20 +18,33 @@ const INITIAL_VISIBLE = 8;
 export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps) {
   const router = useRouter();
   const { addItem } = useCart();
-  const [activeMain, setActiveMain] = useState<string>(catalogCategories[0]?.id ?? "");
+  const [activeMain, setActiveMain] = useState<string>("all");
   const [selectedColors, setSelectedColors] = useState<Record<string, number>>({});
   const [showAll, setShowAll] = useState(false);
 
   const currentMain = catalogCategories.find((m) => m.id === activeMain) ?? null;
   const subRow = currentMain?.subCategories ?? [];
 
-  const catalogProductsAll = catalogProducts;
+  const displayCategories = [
+    { id: "all", label: "All Eyewear" },
+    ...catalogCategories,
+  ];
+
+  const filteredCatalog = catalogProducts.filter((p) =>
+    !activeMain || activeMain === "all" ? true : p.categories.includes(activeMain)
+  );
+  const catalogProductsAll = filteredCatalog;
   const visibleCatalog = showAll ? catalogProductsAll : catalogProductsAll.slice(0, INITIAL_VISIBLE);
 
   const handleQuickAdd = (id: string) => {
     addItem(id, 1);
     router.push("/cart");
   };
+
+  const dynamicHeading =
+    activeMain === "all" || !currentMain
+      ? "Shop Eyewear"
+      : `Shop ${currentMain.label}`;
 
   return (
     <>
@@ -45,22 +58,21 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
             : "relative bg-white"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none pb-1">
-              {catalogCategories.map((cat) => (
-                <Link
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+              {displayCategories.map((cat) => (
+                <button
                   key={cat.id}
-                  href={`/category/${cat.id}`}
-                  onMouseEnter={() => setActiveMain(cat.id)}
-                  className={`shrink-0 px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
+                  onClick={() => setActiveMain(cat.id)}
+                  className={`px-3.5 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
                     activeMain === cat.id
                       ? "bg-luxury-black text-white shadow-md"
                       : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-luxury-black"
                   }`}
                 >
                   {cat.label}
-                </Link>
+                </button>
               ))}
             </div>
 
@@ -85,9 +97,8 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
 
       <section className="mx-auto max-w-7xl w-full px-1 sm:px-6 flex flex-col gap-6 sm:gap-10">
         <div className="flex flex-col gap-2 pt-1">
-          {/* <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Curated Optics</span> */}
           <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black">
-            Full Catalog
+            {dynamicHeading}
           </h2>
           <p className="text-xs text-gray-400">
             {catalogProductsAll.length} styles to explore

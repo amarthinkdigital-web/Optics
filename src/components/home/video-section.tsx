@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface VideoShowcaseProps {
   videoUrl?: string;
@@ -123,7 +124,18 @@ export default function VideoSection({
             </h3>
           </div>
 
-          <div className="flex items-center gap-3 pointer-events-auto">
+          <div className="flex items-center gap-2.5 sm:gap-3 pointer-events-auto">
+            {/* Shop Now Button */}
+            <Link
+              href="/#catalog"
+              className="px-4 py-2 sm:px-6 sm:py-2.5 bg-luxury-gold text-luxury-black font-extrabold text-[10px] sm:text-xs uppercase tracking-widest rounded-full hover:bg-white transition-all duration-300 shadow-xl flex items-center gap-1.5"
+            >
+              Shop Now
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+
             {/* Sound Toggle */}
             <button
               onClick={toggleMute}
