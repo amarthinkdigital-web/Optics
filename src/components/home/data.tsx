@@ -46,6 +46,25 @@ export const products: Product[] = [
     image: "/images/sunglasses_4.png",
     colors: ["#693d25", "#111"],
   },
+  {
+    id: "5",
+    name: "Crystal Rimless Titanium Frames",
+    brand: "PRADA",
+    price: "AED 1,380.00",
+    oldPrice: "AED 1,600.00",
+    image: "/images/sunglasses_3.png",
+    colors: ["#e8e8e8", "#c5a880"],
+    tag: "Sale",
+  },
+  {
+    id: "6",
+    name: "Angular Rectangle Dark Shield",
+    brand: "DIOR",
+    price: "AED 1,240.00",
+    image: "/images/sunglasses_2.png",
+    colors: ["#111", "#2c3e50"],
+    tag: "New",
+  },
 ];
 
 export const trendingProducts = [
@@ -57,9 +76,9 @@ export const trendingProducts = [
     oldPrice: "AED 3,000",
     discount: "46% OFF",
     image: "/images/sunglasses_1.png",
-    bgStyle: "bg-gradient-to-b from-[#0f2d4a] via-[#1b4974] to-[#8ebde8]",
-    textColor: "text-white",
-    tagColor: "text-blue-100",
+    bgStyle: "bg-[#f4f4f4]",
+    textColor: "text-luxury-black",
+    tagColor: "text-gray-500",
   },
   {
     id: "t2",
@@ -69,7 +88,7 @@ export const trendingProducts = [
     oldPrice: "AED 3,500",
     discount: "57% OFF",
     image: "/images/sunglasses_2.png",
-    bgStyle: "bg-gradient-to-b from-[#e3ece7] via-[#b3c7bc] to-[#8ea196]",
+    bgStyle: "bg-[#f4f4f4]",
     textColor: "text-luxury-black",
     tagColor: "text-gray-500",
   },
@@ -81,9 +100,9 @@ export const trendingProducts = [
     oldPrice: "AED 3,000",
     discount: "33% OFF",
     image: "/images/sunglasses_3.png",
-    bgStyle: "bg-gradient-to-b from-[#f2ece2] via-[#dcd2c3] to-[#9c8e7e]",
+    bgStyle: "bg-[#f4f4f4]",
     textColor: "text-luxury-black",
-    tagColor: "text-gray-600",
+    tagColor: "text-gray-500",
   },
   {
     id: "t4",
@@ -93,9 +112,9 @@ export const trendingProducts = [
     oldPrice: "AED 3,000",
     discount: "56% OFF",
     image: "/images/sunglasses_4.png",
-    bgStyle: "bg-gradient-to-b from-[#1b263b] via-[#415a77] to-[#778da9]",
-    textColor: "text-white",
-    tagColor: "text-blue-200",
+    bgStyle: "bg-[#f4f4f4]",
+    textColor: "text-luxury-black",
+    tagColor: "text-gray-500",
   },
   {
     id: "t5",
@@ -105,42 +124,106 @@ export const trendingProducts = [
     oldPrice: "AED 3,000",
     discount: "53% OFF",
     image: "/images/sunglasses_1.png",
-    bgStyle: "bg-gradient-to-b from-[#082216] via-[#1b4332] to-[#52b788]",
-    textColor: "text-white",
-    tagColor: "text-green-100",
+    bgStyle: "bg-[#f4f4f4]",
+    textColor: "text-luxury-black",
+    tagColor: "text-gray-500",
   },
 ];
 
-export const catalogCategories = [
-  { id: "all", label: "All Sunglasses" },
-  { id: "men", label: "Men" },
-  { id: "women", label: "Women" },
-  { id: "polarized", label: "Polarized" },
-  { id: "wayfarer", label: "Wayfarer" },
-  { id: "round", label: "Round" },
-  { id: "rimless", label: "Rimless" },
-  { id: "aviator", label: "Aviator" },
-  { id: "rectangle", label: "Rectangle" },
-  { id: "cateye", label: "Cat-Eye" },
+export interface CatalogSubCategory {
+  id: string;
+  label: string;
+}
+export interface CatalogMainCategory {
+  id: string;
+  label: string;
+  subCategories: CatalogSubCategory[];
+}
+
+/* Parent categories with their sub-categories (mirrors sidebar menu) */
+export const catalogCategories: CatalogMainCategory[] = [
+  {
+    id: "clip-on",
+    label: "Clip-On Glasses",
+    subCategories: [
+      { id: "men", label: "Men" },
+      { id: "women", label: "Women" },
+    ],
+  },
+  {
+    id: "eyeglasses",
+    label: "Eyeglasses",
+    subCategories: [
+      { id: "men", label: "Men" },
+      { id: "women", label: "Women" },
+    ],
+  },
+  {
+    id: "sunglasses",
+    label: "Sunglasses",
+    subCategories: [
+      { id: "men", label: "Men" },
+      { id: "women", label: "Women" },
+    ],
+  },
+  {
+    id: "accessories",
+    label: "Accessories",
+    subCategories: [
+      { id: "cases", label: "Cases" },
+      { id: "cleaning-accessories", label: "Cleaning Accessories" },
+      { id: "eyewear-accessories", label: "Eyewear Accessories" },
+    ],
+  },
 ];
 
+/* Flat list of all category ids + labels (mains and subs) for single-row UIs / routing */
+export function flattenCatalogCategories(): { id: string; label: string }[] {
+  const flat: { id: string; label: string }[] = [];
+  catalogCategories.forEach((main) => {
+    flat.push({ id: main.id, label: main.label });
+    main.subCategories.forEach((sub) => flat.push({ id: sub.id, label: sub.label }));
+  });
+  return flat;
+}
+
+/* Return every category slug (mains + subs) for static route generation */
+export function getAllCategorySlugs(): string[] {
+  return flattenCatalogCategories().map((c) => c.id);
+}
+
+/* Find the parent main category that contains a given sub-category id */
+export function mainOfSub(subId: string): CatalogMainCategory | undefined {
+  return catalogCategories.find((main) =>
+    main.subCategories.some((sub) => sub.id === subId)
+  );
+}
+
 export const catalogProducts: (Product & { categories: string[] })[] = [
-  { id: "c1", name: "Ridge Titanium Aviator", brand: "VERSACE", price: "AED 870", oldPrice: "AED 990", image: "/images/sunglasses_1.png", colors: ["#c5a880","#111"], tag: "New", categories: ["all","men","aviator","polarized"] },
-  { id: "c2", name: "Oversized Acetate Signature", brand: "PRADA", price: "AED 950", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#111","#693d25"], tag: "Trending", categories: ["all","women","rectangle"] },
-  { id: "c3", name: "Sleek Round Titanium Frames", brand: "GUCCI", price: "AED 1,120", oldPrice: "AED 1,300", image: "/images/sunglasses_3.png", colors: ["#c5a880","#2c3e50"], tag: undefined, categories: ["all","men","round","polarized"] },
-  { id: "c4", name: "Geometric Tortoiseshell Cat Eye", brand: "CELINE", price: "AED 1,050", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#693d25","#111"], tag: "New", categories: ["all","women","cateye"] },
-  { id: "c5", name: "Sport Wrap Polarized Shield", brand: "VERSACE", price: "AED 780", oldPrice: "AED 990", image: "/images/sunglasses_1.png", colors: ["#1a1a2e","#c5a880"], tag: "Sale", categories: ["all","men","polarized","rectangle"] },
-  { id: "c6", name: "Butterfly Tinted Rimless", brand: "DIOR", price: "AED 1,240", oldPrice: undefined, image: "/images/sunglasses_3.png", colors: ["#e8c0a0","#4f5e50"], tag: "New", categories: ["all","women","rimless"] },
-  { id: "c7", name: "Classic Wayfarer Black", brand: "RAY-BAN", price: "AED 650", oldPrice: "AED 750", image: "/images/sunglasses_2.png", colors: ["#111","#3d3d3d"], tag: undefined, categories: ["all","men","women","wayfarer"] },
-  { id: "c8", name: "Round Retro Gold Frame", brand: "GUCCI", price: "AED 890", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#c5a880","#b87333"], tag: "Trending", categories: ["all","women","round"] },
-  { id: "c9", name: "Classic Aviator Gold Lens", brand: "RAY-BAN", price: "AED 720", oldPrice: "AED 850", image: "/images/sunglasses_1.png", colors: ["#c5a880","#2c3e50"], tag: undefined, categories: ["all","men","aviator"] },
-  { id: "c10", name: "Havana Wayfarer Tortoise", brand: "RAY-BAN", price: "AED 690", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#693d25","#111"], tag: "New", categories: ["all","men","women","wayfarer"] },
-  { id: "c11", name: "Crystal Rimless Titanium", brand: "PRADA", price: "AED 1,380", oldPrice: "AED 1,600", image: "/images/sunglasses_3.png", colors: ["#e8e8e8","#c5a880"], tag: "Sale", categories: ["all","women","rimless","polarized"] },
-  { id: "c12", name: "Angular Rectangle Dark", brand: "CELINE", price: "AED 1,010", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#111","#2c3e50"], tag: undefined, categories: ["all","men","rectangle"] },
+  { id: "c1", name: "Ridge Titanium Aviator", brand: "VERSACE", price: "AED 870", oldPrice: "AED 990", image: "/images/sunglasses_1.png", colors: ["#c5a880","#111"], tag: "New", categories: ["all","clip-on","men"] },
+  { id: "c2", name: "Oversized Acetate Signature", brand: "PRADA", price: "AED 950", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#111","#693d25"], tag: "Trending", categories: ["all","clip-on","women"] },
+  { id: "c3", name: "Sleek Round Titanium Frames", brand: "GUCCI", price: "AED 1,120", oldPrice: "AED 1,300", image: "/images/sunglasses_3.png", colors: ["#c5a880","#2c3e50"], tag: undefined, categories: ["all","clip-on","men"] },
+  { id: "c4", name: "Geometric Tortoiseshell Cat Eye", brand: "CELINE", price: "AED 1,050", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#693d25","#111"], tag: "New", categories: ["all","eyeglasses","women"] },
+  { id: "c5", name: "Sport Wrap Polarized Shield", brand: "VERSACE", price: "AED 780", oldPrice: "AED 990", image: "/images/sunglasses_1.png", colors: ["#1a1a2e","#c5a880"], tag: "Sale", categories: ["all","eyeglasses","men"] },
+  { id: "c6", name: "Butterfly Tinted Rimless", brand: "DIOR", price: "AED 1,240", oldPrice: undefined, image: "/images/sunglasses_3.png", colors: ["#e8c0a0","#4f5e50"], tag: "New", categories: ["all","eyeglasses","women"] },
+  { id: "c7", name: "Classic Wayfarer Black", brand: "RAY-BAN", price: "AED 650", oldPrice: "AED 750", image: "/images/sunglasses_2.png", colors: ["#111","#3d3d3d"], tag: undefined, categories: ["all","sunglasses","men"] },
+  { id: "c8", name: "Round Retro Gold Frame", brand: "GUCCI", price: "AED 890", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#c5a880","#b87333"], tag: "Trending", categories: ["all","sunglasses","women"] },
+  { id: "c9", name: "Classic Aviator Gold Lens", brand: "RAY-BAN", price: "AED 720", oldPrice: "AED 850", image: "/images/sunglasses_1.png", colors: ["#c5a880","#2c3e50"], tag: undefined, categories: ["all","sunglasses","men"] },
+  { id: "c10", name: "Havana Wayfarer Tortoise", brand: "RAY-BAN", price: "AED 690", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#693d25","#111"], tag: "New", categories: ["all","accessories","cases"] },
+  { id: "c11", name: "Crystal Rimless Titanium", brand: "PRADA", price: "AED 1,380", oldPrice: "AED 1,600", image: "/images/sunglasses_3.png", colors: ["#e8e8e8","#c5a880"], tag: "Sale", categories: ["all","accessories","cleaning-accessories"] },
+  { id: "c12", name: "Angular Rectangle Dark", brand: "CELINE", price: "AED 1,010", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#111","#2c3e50"], tag: undefined, categories: ["all","accessories","eyewear-accessories"] },
 ];
 
 /* Map sidebar / URL slugs to catalog category filter ids */
 export const slugToCategory: Record<string, string> = {
+  "clip-on": "clip-on",
+  "clip-on-glasses": "clip-on",
+  eyeglasses: "eyeglasses",
+  sunglasses: "sunglasses",
+  accessories: "accessories",
+  cases: "cases",
+  "cleaning-accessories": "cleaning-accessories",
+  "eyewear-accessories": "eyewear-accessories",
   men: "men",
   women: "women",
   unisex: "",
@@ -159,6 +242,14 @@ export const slugToCategory: Record<string, string> = {
 };
 
 export const slugLabels: Record<string, string> = {
+  "clip-on": "Clip-On Glasses",
+  "clip-on-glasses": "Clip-On Glasses",
+  eyeglasses: "Eyeglasses",
+  sunglasses: "Sunglasses",
+  accessories: "Accessories",
+  cases: "Cases",
+  "cleaning-accessories": "Cleaning Accessories",
+  "eyewear-accessories": "Eyewear Accessories",
   men: "Men",
   women: "Women",
   unisex: "Unisex",
@@ -226,6 +317,17 @@ export const productDescriptions: Record<string, string> = {
   c10: "Havana-wayfarer tortoiseshell acetate with warm tones, a modern classic that flatters every face.",
   c11: "Crystal rimless titanium frames that are virtually weightless, paired with polarized crystal lenses.",
   c12: "Angular rectangle frames in a deep, dark finish for a sharp, confident, modern profile.",
+  "1": "A bold aviator silhouette rendered in feather-light titanium with smoke-gradient polarized lenses for all-day clarity and a timeless edge.",
+  "2": "An oversized acetate frame with a sculpted signature profile, crafted with hand-polished Italian acetate and premium optical lenses.",
+  "3": "Sleek round titanium optical frames with a refined minimal profile, engineered for a featherweight, all-day comfortable fit.",
+  "4": "Geometric tortoiseshell cat-eye eyewear with a sculpted brow and gold-tone accents—bold, feminine, and unmistakably statement.",
+  "5": "Crystal rimless titanium frames that are virtually weightless, paired with polarized crystal lenses for total clarity.",
+  "6": "Angular rectangle frames in a deep, dark finish for a sharp, confident, and unmistakably modern profile.",
+  t1: "Sport-tech performance frames designed for the bold. Ultralight, impact-resistant lenses with a contemporary wraparound silhouette.",
+  t2: "Sage green rimless frames with a refined, barely-there aesthetic. Perfect for everyday wear with a clean, minimalist edge.",
+  t3: "New-arrival titanium frames with a featherlight build and precision-crafted hinges for the ultimate in comfort and luxury.",
+  t4: "Bold and fearless—Flammo frames deliver high-contrast style with striking lens geometry built for those who own every room.",
+  t5: "Prestige-level luxury eyewear with a refined silhouette and premium materials that command attention effortlessly.",
 };
 
 export const galleryLabels = [
@@ -250,6 +352,17 @@ export const productGallery: Record<string, string[]> = {
   c10: ["/images/sunglasses_2.png", "/images/sunglasses_4.png", "/images/tryon_model.png", "/images/sunglasses_1.png", "/images/hero_model.png"],
   c11: ["/images/sunglasses_3.png", "/images/sunglasses_1.png", "/images/tryon_model.png", "/images/sunglasses_4.png", "/images/hero_model.png"],
   c12: ["/images/sunglasses_4.png", "/images/sunglasses_2.png", "/images/tryon_model.png", "/images/sunglasses_3.png", "/images/hero_model.png"],
+  "1": ["/images/sunglasses_1.png", "/images/sunglasses_2.png", "/images/tryon_model.png", "/images/sunglasses_3.png", "/images/hero_model.png"],
+  "2": ["/images/sunglasses_2.png", "/images/sunglasses_1.png", "/images/tryon_model.png", "/images/sunglasses_4.png", "/images/hero_model.png"],
+  "3": ["/images/sunglasses_3.png", "/images/sunglasses_1.png", "/images/tryon_model.png", "/images/sunglasses_2.png", "/images/hero_model.png"],
+  "4": ["/images/sunglasses_4.png", "/images/sunglasses_2.png", "/images/tryon_model.png", "/images/sunglasses_1.png", "/images/hero_model.png"],
+  "5": ["/images/sunglasses_3.png", "/images/sunglasses_1.png", "/images/tryon_model.png", "/images/sunglasses_4.png", "/images/hero_model.png"],
+  "6": ["/images/sunglasses_2.png", "/images/sunglasses_4.png", "/images/tryon_model.png", "/images/sunglasses_1.png", "/images/hero_model.png"],
+  t1: ["/images/sunglasses_1.png", "/images/sunglasses_3.png", "/images/tryon_model.png", "/images/sunglasses_2.png", "/images/hero_model.png"],
+  t2: ["/images/sunglasses_2.png", "/images/sunglasses_4.png", "/images/tryon_model.png", "/images/sunglasses_1.png", "/images/hero_model.png"],
+  t3: ["/images/sunglasses_3.png", "/images/sunglasses_2.png", "/images/tryon_model.png", "/images/sunglasses_4.png", "/images/hero_model.png"],
+  t4: ["/images/sunglasses_4.png", "/images/sunglasses_1.png", "/images/tryon_model.png", "/images/sunglasses_3.png", "/images/hero_model.png"],
+  t5: ["/images/sunglasses_1.png", "/images/sunglasses_4.png", "/images/tryon_model.png", "/images/sunglasses_2.png", "/images/hero_model.png"],
 };
 
 export const framesOverlay: Record<string, React.ReactNode> = {  aviator: (

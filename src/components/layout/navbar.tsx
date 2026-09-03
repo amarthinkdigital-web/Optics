@@ -52,8 +52,10 @@ const categories: NavCategory[] = [
     label: "Accessories",
     icon: "▢",
     items: [
-      { label: "Men", href: "/category/men" },
-      { label: "Women", href: "/category/women" },
+      { label: "Cases", href: "/category/cases" },
+      { label: "Cleaning Accessories", href: "/category/cleaning-accessories" },
+      { label: "Eyewear Accessories", href: "/category/eyewear-accessories" },
+      { label: "View All", href: "/category/accessories" },
     ],
   },
 ];
@@ -224,16 +226,35 @@ export default function Navbar() {
         {/* ── SCROLLABLE BODY ── */}
         <div className="flex-1 overflow-y-auto scrollbar-none">
 
-          {/* Pill tag row */}
-          <div className="flex gap-2 px-7 pt-5 pb-1">
-            {["New In", "Sale"].map((tag) => (
-              <span
-                key={tag}
+          {/* Pill tag row + Search */}
+          <div className="flex items-center gap-2 px-7 pt-5 pb-1">
+            {[
+              { label: "New In", href: "/category/new-arrivals" },
+              { label: "Sale", href: "/category/best-sellers" },
+            ].map((tag) => (
+              <Link
+                key={tag.label}
+                href={tag.href}
+                onClick={() => setIsOpen(false)}
                 className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/10 text-white hover:bg-luxury-gold hover:text-luxury-black cursor-pointer transition-all duration-200"
               >
-                {tag}
-              </span>
+                {tag.label}
+              </Link>
             ))}
+
+            {/* Search Icon + Input */}
+            <div className="ml-auto flex items-center">
+              <div className="flex items-center gap-2 bg-white/10 rounded-full px-3 py-1.5 focus-within:bg-white/20 transition-all duration-300">
+                <svg className="h-3.5 w-3.5 text-gray-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="bg-transparent text-[11px] text-white placeholder:text-gray-400 focus:outline-none w-20 focus:w-28 transition-all duration-300"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Accordion categories */}

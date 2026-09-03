@@ -3,17 +3,16 @@ import ProductGrid from "@/components/shop/product-grid";
 import {
   slugToCategory,
   slugLabels,
-  catalogCategories,
+  getAllCategorySlugs,
 } from "@/components/home/data";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ parent?: string }>;
 };
 
 export function generateStaticParams() {
-  return catalogCategories
-    .filter((c) => c.id !== "all")
-    .map((c) => ({ slug: c.id }));
+  return getAllCategorySlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -22,8 +21,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return { title: `${label} | Optics` };
 }
 
-export default async function CategoryPage({ params }: PageProps) {
+export default async function CategoryPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
+  const { parent } = await searchParams;
   const label = slugLabels[slug];
 
   if (!label) {
@@ -45,6 +45,7 @@ export default async function CategoryPage({ params }: PageProps) {
     <div className="min-h-[60vh] bg-[#faf9f6] pb-16">
       <ProductGrid
         initialCategory={filter}
+        parentMain={parent}
         heading={label}
         subheading={
           filter === ""

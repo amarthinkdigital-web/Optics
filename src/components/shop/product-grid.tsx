@@ -6,31 +6,39 @@ import Link from "next/link";
 import {
   catalogCategories,
   catalogProducts,
+  mainOfSub,
   slugify,
 } from "@/components/home/data";
 
 interface ProductGridProps {
   initialCategory?: string;
+  parentMain?: string;
   heading?: string;
   subheading?: string;
 }
 
-const catalogCategoryIds = new Set(catalogCategories.map((c) => c.id));
-
 export default function ProductGrid({
   initialCategory = "",
+  parentMain = "",
   heading = "Full Catalog",
   subheading,
 }: ProductGridProps) {
-  const preselected = catalogCategoryIds.has(initialCategory)
+  const isMain = catalogCategories.some((m) => m.id === initialCategory);
+
+  const resolvedMain = isMain
     ? initialCategory
-    : "all";
-  const [catalogCategory, setCatalogCategory] = useState<string>(preselected);
+    : parentMain || mainOfSub(initialCategory)?.id || "";
+  const activeMain = catalogCategories.find((m) => m.id === resolvedMain) ?? null;
+
+  const activeCategory = isMain ? initialCategory : initialCategory || "all";
+  const activeSub = isMain ? null : initialCategory;
 
   const activeFilter =
-    catalogCategory === "all"
+    activeCategory === "all"
       ? catalogProducts
-      : catalogProducts.filter((p) => p.categories.includes(catalogCategory));
+      : catalogProducts.filter((p) => p.categories.includes(activeCategory));
+
+  const [selectedColors] = useState<Record<string, number>>({});
 
   return (
     <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 flex flex-col gap-8 py-8 sm:py-10">
@@ -47,25 +55,48 @@ export default function ProductGrid({
         {subheading && <p className="text-xs text-gray-500">{subheading}</p>}
       </div>
 
-      <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none pb-1">
-        {catalogCategories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setCatalogCategory(cat.id)}
-            className={`px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap shrink-0 ${
-              catalogCategory === cat.id
-                ? "bg-luxury-black text-white shadow-md"
-                : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-luxury-black"
-            }`}
-          >
-            {cat.label}
-          </button>
-        ))}
+      {/* Main category row */}
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none pb-1">
+          {catalogCategories.map((cat) => (
+            <Link
+              key={`main-${cat.id}`}
+              href={`/category/${cat.id}`}
+              className={`shrink-0 px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
+                activeMain?.id === cat.id
+                  ? "bg-luxury-black text-white shadow-md"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-luxury-black"
+              }`}
+            >
+              {cat.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Sub category row of the active main */}
+        {activeMain && activeMain.subCategories.length > 0 && (
+          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none">
+            {activeMain.subCategories.map((sub) => (
+              <Link
+                key={`sub-${sub.id}`}
+                href={`/category/${sub.id}?parent=${activeMain.id}`}
+                className={`shrink-0 px-4 py-2 text-[10px] font-semibold uppercase tracking-wider rounded-full border transition-all duration-300 whitespace-nowrap ${
+                  activeSub === sub.id
+                    ? "bg-luxury-gold text-luxury-black border-luxury-gold shadow-sm"
+                    : "bg-transparent text-gray-500 border-gray-200 hover:border-luxury-gold hover:text-luxury-black"
+                }`}
+              >
+                {sub.label}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {activeFilter.map((product) => {
           const slug = slugify(product.name);
+          const activeColorIdx = selectedColors[product.id] || 0;
           return (
             <Link
               key={product.id}
@@ -116,10 +147,14 @@ export default function ProductGrid({
                     </span>
                   </div>
                   <div className="flex gap-1.5">
-                    {product.colors.map((color) => (
+                    {product.colors.map((color, colorIdx) => (
                       <span
                         key={color}
-                        className="w-3.5 h-3.5 rounded-full border border-gray-200"
+                        className={`w-3.5 h-3.5 rounded-full border transition-all duration-300 ${
+                          activeColorIdx === colorIdx
+                            ? "ring-1 ring-offset-1 ring-luxury-black scale-110"
+                            : "border-gray-200"
+                        }`}
                         style={{ backgroundColor: color }}
                       />
                     ))}

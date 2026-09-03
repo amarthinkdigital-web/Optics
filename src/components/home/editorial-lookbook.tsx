@@ -72,11 +72,11 @@ export default function EditorialLookbook() {
 
       <div className="w-full max-w-7xl mx-auto grid grid-cols-3 gap-4 pt-1.5 text-center px-6">
         <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-luxury-black leading-tight">
-          OPTICS PICCADILLY
+          OPTICS GALLERY
         </span>
         <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-300">•</span>
         <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-luxury-black leading-tight">
-          OPTICS KOYASAN
+          OPTICS GALLERY
         </span>
       </div>
     </section>

@@ -18,12 +18,15 @@ const INITIAL_VISIBLE = 8;
 export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps) {
   const router = useRouter();
   const { addItem } = useCart();
-  const [catalogCategory, setCatalogCategory] = useState<string>("all");
+  const [activeMain, setActiveMain] = useState<string>(catalogCategories[0]?.id ?? "");
   const [selectedColors, setSelectedColors] = useState<Record<string, number>>({});
   const [showAll, setShowAll] = useState(false);
 
-  const filteredCatalog = catalogProducts.filter(p => p.categories.includes(catalogCategory));
-  const visibleCatalog = showAll ? filteredCatalog : filteredCatalog.slice(0, INITIAL_VISIBLE);
+  const currentMain = catalogCategories.find((m) => m.id === activeMain) ?? null;
+  const subRow = currentMain?.subCategories ?? [];
+
+  const catalogProductsAll = catalogProducts;
+  const visibleCatalog = showAll ? catalogProductsAll : catalogProductsAll.slice(0, INITIAL_VISIBLE);
 
   const handleQuickAdd = (id: string) => {
     addItem(id, 1);
@@ -43,38 +46,55 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
         }`}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none pb-1">
-            {catalogCategories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setCatalogCategory(cat.id)}
-                className={`px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
-                  catalogCategory === cat.id
-                    ? "bg-luxury-black text-white shadow-md"
-                    : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-luxury-black"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none pb-1">
+              {catalogCategories.map((cat) => (
+                <Link
+                  key={cat.id}
+                  href={`/category/${cat.id}`}
+                  onMouseEnter={() => setActiveMain(cat.id)}
+                  className={`shrink-0 px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
+                    activeMain === cat.id
+                      ? "bg-luxury-black text-white shadow-md"
+                      : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-luxury-black"
+                  }`}
+                >
+                  {cat.label}
+                </Link>
+              ))}
+            </div>
+
+            {subRow.length > 0 && (
+              <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none">
+                {subRow.map((sub) => (
+                  <Link
+                    key={sub.id}
+                    href={`/category/${sub.id}?parent=${currentMain?.id ?? ""}`}
+                    className="shrink-0 px-4 py-2 text-[10px] font-semibold uppercase tracking-wider rounded-full border transition-all duration-300 whitespace-nowrap bg-transparent text-gray-500 border-gray-200 hover:border-luxury-gold hover:text-luxury-black"
+                  >
+                    {sub.label}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {stickyBar && <div className="h-[60px]" />}
 
-      <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 flex flex-col gap-6 sm:gap-10">
-        <div className="flex flex-col gap-2 pt-2">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Curated Optics</span>
+      <section className="mx-auto max-w-7xl w-full px-1 sm:px-6 flex flex-col gap-6 sm:gap-10">
+        <div className="flex flex-col gap-2 pt-1">
+          {/* <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Curated Optics</span> */}
           <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black">
             Full Catalog
           </h2>
           <p className="text-xs text-gray-400">
-            {filteredCatalog.length} styles available
+            {catalogProductsAll.length} styles available
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-1 sm:gap-3">
           {visibleCatalog.map((product) => {
             const activeColorIdx = selectedColors[product.id] || 0;
             const productSlug = slugify(product.name);
@@ -85,7 +105,7 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
               >
                 <Link
                   href={`/products/${productSlug}`}
-                  className="relative aspect-square w-full bg-gray-50 flex items-center justify-center p-6 overflow-hidden"
+                  className="relative aspect-square w-full bg-gray-50 flex items-center justify-center p-4 sm:p-6 overflow-hidden"
                 >
                   {product.tag && (
                     <span className={`absolute top-4 left-4 z-10 px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full ${
@@ -100,7 +120,7 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
                     src={product.image}
                     alt={product.name}
                     fill
-                    className="object-contain p-6 group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className="object-contain p-4 sm:p-6 group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
                   <div
                     className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 z-10"
@@ -119,7 +139,7 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
                   </div>
                 </Link>
 
-                <div className="flex flex-col gap-3 p-5 flex-1 justify-between">
+                <div className="flex flex-col gap-3 p-3 sm:p-5 flex-1 justify-between">
                   <div className="flex flex-col gap-1.5">
                     <Link href={`/products/${productSlug}`} className="group/title flex flex-col gap-1.5">
                       <span className="text-[9px] font-bold tracking-wider text-gray-400 uppercase">{product.brand}</span>
@@ -156,7 +176,7 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
           })}
         </div>
 
-        {filteredCatalog.length > INITIAL_VISIBLE && (
+        {catalogProductsAll.length > INITIAL_VISIBLE && (
           <div className="flex justify-center pt-4">
             <button
               onClick={() => setShowAll(!showAll)}
