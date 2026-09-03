@@ -67,67 +67,80 @@ export default function CartPage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
             {/* Items */}
-            <div className="lg:col-span-2 flex flex-col gap-4">
+            <div className="lg:col-span-2 flex flex-col gap-3 sm:gap-4">
               {items.map(({ product, quantity, detailsHref }) => (
                 <div
                   key={product.id}
-                  className="flex gap-3 sm:gap-4 p-4 bg-white border border-gray-200/60 rounded-2xl"
+                  className="flex gap-3 sm:gap-4 p-3.5 sm:p-4 bg-white border border-gray-200/60 rounded-2xl items-center"
                 >
                   {detailsHref ? (
                     <Link
                       href={detailsHref}
-                      className="relative h-28 w-28 shrink-0 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center"
+                      className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center"
                     >
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain p-3"
+                        className="object-contain p-2 sm:p-3"
                       />
                     </Link>
                   ) : (
-                    <div className="relative h-28 w-28 shrink-0 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center">
+                    <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center">
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain p-3"
+                        className="object-contain p-2 sm:p-3"
                       />
                     </div>
                   )}
-                  <div className="flex flex-1 flex-col justify-between gap-2">
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[9px] font-bold tracking-wider text-gray-400 uppercase">
-                        {product.brand}
-                      </span>
-                      {detailsHref ? (
-                        <Link
-                          href={detailsHref}
-                          className="font-display font-medium text-sm text-luxury-black hover:text-luxury-gold transition-colors"
-                        >
-                          {product.name}
-                        </Link>
-                      ) : (
-                        <span className="font-display font-medium text-sm text-luxury-black">
-                          {product.name}
+                  <div className="flex flex-1 flex-col justify-between gap-3 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-[9px] font-bold tracking-wider text-gray-400 uppercase">
+                          {product.brand}
                         </span>
-                      )}
+                        {detailsHref ? (
+                          <Link
+                            href={detailsHref}
+                            className="font-display font-semibold text-xs sm:text-sm text-luxury-black hover:text-luxury-gold transition-colors line-clamp-2"
+                          >
+                            {product.name}
+                          </Link>
+                        ) : (
+                          <span className="font-display font-semibold text-xs sm:text-sm text-luxury-black line-clamp-2">
+                            {product.name}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-col items-end shrink-0 text-right">
+                        <span className="text-xs sm:text-sm font-extrabold text-luxury-black whitespace-nowrap">
+                          {product.price}
+                        </span>
+                        {product.oldPrice && (
+                          <span className="text-[9px] sm:text-[10px] text-gray-400 line-through whitespace-nowrap">
+                            {product.oldPrice}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
+
+                    <div className="flex items-center justify-between gap-2 pt-2 border-t border-gray-100">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
                         <button
                           onClick={() => updateQuantity(product.id, quantity - 1)}
-                          className="h-8 w-8 rounded-full border border-gray-200 text-luxury-black hover:border-luxury-black transition-colors"
+                          className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border border-gray-200 text-luxury-black hover:border-luxury-black flex items-center justify-center text-xs transition-colors"
                           aria-label="Decrease quantity"
                         >
                           −
                         </button>
-                        <span className="text-sm font-semibold w-6 text-center">
+                        <span className="text-xs sm:text-sm font-semibold w-5 sm:w-6 text-center">
                           {quantity}
                         </span>
                         <button
                           onClick={() => updateQuantity(product.id, quantity + 1)}
-                          className="h-8 w-8 rounded-full border border-gray-200 text-luxury-black hover:border-luxury-black transition-colors"
+                          className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border border-gray-200 text-luxury-black hover:border-luxury-black flex items-center justify-center text-xs transition-colors"
                           aria-label="Increase quantity"
                         >
                           +
@@ -140,16 +153,6 @@ export default function CartPage() {
                         Remove
                       </button>
                     </div>
-                  </div>
-                  <div className="flex flex-col items-end justify-between shrink-0">
-                    {product.oldPrice && (
-                      <span className="text-[10px] text-gray-400 line-through">
-                        {product.oldPrice}
-                      </span>
-                    )}
-                    <span className="text-sm font-bold text-luxury-black">
-                      {product.price}
-                    </span>
                   </div>
                 </div>
               ))}

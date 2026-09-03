@@ -90,7 +90,7 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
             Full Catalog
           </h2>
           <p className="text-xs text-gray-400">
-            {catalogProductsAll.length} styles available
+            {catalogProductsAll.length} styles to explore
           </p>
         </div>
 

@@ -144,7 +144,7 @@ export interface CatalogMainCategory {
 export const catalogCategories: CatalogMainCategory[] = [
   {
     id: "clip-on",
-    label: "Clip-On Glasses",
+    label: "Shop Clip-On Glasses",
     subCategories: [
       { id: "men", label: "Men" },
       { id: "women", label: "Women" },
@@ -152,7 +152,7 @@ export const catalogCategories: CatalogMainCategory[] = [
   },
   {
     id: "eyeglasses",
-    label: "Eyeglasses",
+    label: "Shop Eyeglasses",
     subCategories: [
       { id: "men", label: "Men" },
       { id: "women", label: "Women" },
@@ -160,7 +160,7 @@ export const catalogCategories: CatalogMainCategory[] = [
   },
   {
     id: "sunglasses",
-    label: "Sunglasses",
+    label: "Shop Sunglasses",
     subCategories: [
       { id: "men", label: "Men" },
       { id: "women", label: "Women" },
@@ -168,7 +168,7 @@ export const catalogCategories: CatalogMainCategory[] = [
   },
   {
     id: "accessories",
-    label: "Accessories",
+    label: "Shop Accessories",
     subCategories: [
       { id: "cases", label: "Cases" },
       { id: "cleaning-accessories", label: "Cleaning Accessories" },
