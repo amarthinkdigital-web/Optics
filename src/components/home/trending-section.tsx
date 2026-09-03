@@ -32,9 +32,9 @@ export default function TrendingSection() {
     <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 flex flex-col gap-4 sm:gap-6">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
+          {/* <span className="text-[15px] font-bold uppercase tracking-widest text-luxury-gold">
             Weekly Highlights
-          </span>
+          </span> */}
           <h2 className="font-display text-xl sm:text-2xl font-extrabold tracking-tight text-luxury-black uppercase">
             Trending This Week
           </h2>
@@ -80,56 +80,33 @@ export default function TrendingSection() {
               </div>
 
               {/* Center: Product Image */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
-                <div className="relative w-[85%] aspect-square group-hover:scale-110 transition-transform duration-[6000ms] ease-out filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.3)]">
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none mt-6 sm:mt-8">
+                <div className="relative w-[110%] sm:w-[120%] aspect-square group-hover:scale-105 transition-transform duration-[6000ms] ease-out filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.2)]">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    sizes="220px"
+                    sizes="(max-width: 640px) 250px, 320px"
                     className="object-contain"
                   />
                 </div>
               </div>
 
               {/* Bottom: Price & Cart */}
-              <div className="relative z-10 w-full bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 flex items-center justify-between shadow-lg">
-                <div className="flex flex-col">
-                  <span className="text-[11px] font-extrabold text-luxury-black leading-none">
+              <div className="relative z-10 w-full bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 flex items-center justify-center text-center shadow-lg group-hover:bg-white transition-colors duration-300">
+                <div className="flex flex-col items-center">
+                  <span className="text-[12px] sm:text-[14px] font-extrabold text-luxury-black leading-none tracking-wide">
                     {product.price}
                   </span>
-                  <div className="flex items-center gap-1.5 mt-1">
-                    <span className="text-[9px] text-gray-400 line-through">
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <span className="text-[10px] text-gray-400 line-through">
                       {product.oldPrice}
                     </span>
-                    <span className="text-[8px] font-extrabold text-red-500 bg-red-50 px-1 rounded">
+                    <span className="text-[9px] font-extrabold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">
                       {product.discount}
                     </span>
                   </div>
                 </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAdd(product.id);
-                  }}
-                  aria-label="Add to cart"
-                  className="w-8 h-8 rounded-full bg-luxury-black text-white hover:bg-luxury-gold transition-colors duration-300 flex items-center justify-center shadow-sm shrink-0"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                    />
-                  </svg>
-                </button>
               </div>
             </div>
           );

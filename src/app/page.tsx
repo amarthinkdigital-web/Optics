@@ -27,17 +27,27 @@ export default function Home() {
   }, [handleScroll]);
 
   return (
-    <div className="flex flex-col gap-16 md:gap-24 pb-20 bg-[#faf9f6] overflow-x-hidden">
+    <div className="flex flex-col pb-20 bg-[#faf9f6]">
       <HeroSection />
-      <TrendingSection />
-      <VirtualTryOnSection />
-      <EditorialLookbook />
-      <FullCatalog
-        catalogRef={catalogRef}
-        catTabsRef={catTabsRef}
-        stickyBar={stickyBar}
-      />
-      <LuxuryPromo />
+      <div className="mt-4 md:mt-12" id="trending">
+        <TrendingSection />
+      </div>
+      <div className="mt-16 md:mt-24" id="catalog">
+        <FullCatalog
+          catalogRef={catalogRef}
+          catTabsRef={catTabsRef}
+          stickyBar={stickyBar}
+        />
+      </div>
+      <div className="mt-16 md:mt-24" id="favorites">
+        <VirtualTryOnSection />
+      </div>
+      <div className="mt-16 md:mt-24" id="editorial">
+        <EditorialLookbook />
+      </div>
+      <div className="mt-16 md:mt-24" id="promo">
+        <LuxuryPromo />
+      </div>
     </div>
   );
 }

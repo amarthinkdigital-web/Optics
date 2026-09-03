@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ProductBuy from "@/components/shop/product-buy";
 import ProductGallery from "@/components/shop/product-gallery";
+import RelatedProducts from "@/components/shop/related-products";
 import {
   catalogProducts,
   products,
@@ -31,7 +32,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
-  const product = getAllProducts().find((p) => slugify(p.name) === slug);
+  const allProds = getAllProducts();
+  const product = allProds.find((p) => slugify(p.name) === slug);
 
   if (!product) {
     return (
@@ -52,6 +54,20 @@ export default async function ProductPage({ params }: PageProps) {
   const description = productDescriptions[product.id] || "Premium eyewear handcrafted for ultimate clarity, comfort, and luxury style.";
   const brandName = ("brand" in product && product.brand) ? product.brand : "OPTICS";
   const colorsList = ("colors" in product && product.colors) ? product.colors : ["#111", "#c5a880"];
+
+  const relatedItems = allProds
+    .filter((p) => p.id !== product.id)
+    .slice(0, 8)
+    .map((p) => ({
+      id: p.id,
+      name: p.name,
+      brand: ("brand" in p && p.brand) ? p.brand : "OPTICS",
+      price: p.price,
+      oldPrice: ("oldPrice" in p) ? p.oldPrice : undefined,
+      image: p.image,
+      slug: slugify(p.name),
+      tag: ("tag" in p && p.tag) ? p.tag : undefined,
+    }));
 
   return (
     <div className="min-h-[70vh] bg-[#faf9f6]">
@@ -160,6 +176,9 @@ export default async function ProductPage({ params }: PageProps) {
           </div>
         </div>
       </div>
+
+      {/* Dark background related products section above footer */}
+      <RelatedProducts items={relatedItems} />
     </div>
   );
 }

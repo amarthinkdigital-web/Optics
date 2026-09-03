@@ -44,10 +44,10 @@ export default function Footer() {
 
       {/* Main Footer Content */}
       <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 lg:gap-8">
 
           {/* Brand Column */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
+          <div className="col-span-2 lg:col-span-4 flex flex-col gap-6 mb-4 lg:mb-0">
             <Link href="/" className="inline-block hover:opacity-80 transition-opacity duration-300">
               <Image
                 src="/images/logo.webp"
@@ -75,16 +75,15 @@ export default function Footer() {
           </div>
 
           {/* Shop Links */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Shop</h4>
+          <div className="col-span-1 lg:col-span-2 flex flex-col gap-4">
+            <h4 className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Explore</h4>
             <ul className="flex flex-col gap-3">
               {[
-                { label: "All Sunglasses", href: "/products" },
-                { label: "New Arrivals", href: "/category/new-arrivals" },
-                { label: "Best Sellers", href: "/category/best-sellers" },
-                { label: "Men", href: "/category/men" },
-                { label: "Women", href: "/category/women" },
-                { label: "Polarized", href: "/category/polarized" },
+                { label: "Trending This Week", href: "/#trending" },
+                { label: "Full Catalog", href: "/#catalog" },
+                { label: "Most Loved Frames", href: "/#favorites" },
+                { label: "Editorial Lookbook", href: "/#editorial" },
+                { label: "Special Promo", href: "/#promo" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
@@ -96,13 +95,17 @@ export default function Footer() {
           </div>
 
           {/* Company Links */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+          <div className="col-span-1 lg:col-span-2 flex flex-col gap-4">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Company</h4>
             <ul className="flex flex-col gap-3">
-              {["About Us", "Our Story", "Sustainability", "Careers", "Press"].map((label) => (
-                <li key={label}>
-                  <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
-                    {label}
+              {[
+                { label: "Our Stores", href: "/brands" },
+                { label: "About Us", href: "/about" },
+                { label: "Contact Us", href: "/contact" }
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -110,15 +113,12 @@ export default function Footer() {
           </div>
 
           {/* Support Links */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+          <div className="col-span-1 lg:col-span-2 flex flex-col gap-4">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Support</h4>
             <ul className="flex flex-col gap-3">
               {[
-                { label: "FAQ", href: "/faq" },
-                { label: "Shipping Info", href: "/shipping" },
-                { label: "Returns & Exchanges", href: "/returns" },
-                { label: "Size Guide", href: "/size-guide" },
-                { label: "Track Order", href: "/track-order" },
+                { label: "Shipping & Delivery", href: "/shipping" },
+                { label: "Returns & Exchange", href: "/returns" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
@@ -130,7 +130,7 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
+          <div className="col-span-1 lg:col-span-2 flex flex-col gap-4">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">Contact</h4>
             <ul className="flex flex-col gap-3">
               <li className="flex flex-col gap-1">
