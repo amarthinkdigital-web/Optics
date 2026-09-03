@@ -49,9 +49,9 @@ export default function Home() {
       <div className="mt-16 md:mt-24" id="video">
         <VideoSection />
       </div>
-      <div className="mt-16 md:mt-24" id="promo">
+      {/* <div className="mt-16 md:mt-24" id="promo">
         <LuxuryPromo />
-      </div>
+      </div> */}
     </div>
   );
 }
