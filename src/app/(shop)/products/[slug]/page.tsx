@@ -5,6 +5,7 @@ import ProductGallery from "@/components/shop/product-gallery";
 import RelatedProducts from "@/components/shop/related-products";
 import {
   catalogProducts,
+  ogEditProducts,
   products,
   trendingProducts,
   productDescriptions,
@@ -17,7 +18,7 @@ type PageProps = {
 };
 
 const getAllProducts = () => {
-  return [...catalogProducts, ...products, ...trendingProducts];
+  return [...catalogProducts, ...ogEditProducts, ...products, ...trendingProducts];
 };
 
 export function generateStaticParams() {
