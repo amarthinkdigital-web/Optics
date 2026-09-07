@@ -64,6 +64,7 @@ export default function VideoSection({
           src={posterUrl}
           alt="Cinematic Showcase Poster"
           fill
+          sizes="100vw"
           priority
           className="object-cover z-0 opacity-80"
         />

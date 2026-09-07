@@ -13,7 +13,7 @@ export default function EditorialLookbook() {
       <div className="w-full grid grid-cols-3 gap-[1px] bg-gray-200/80 border-y border-gray-200/80 overflow-hidden shadow-sm">
         {/* Row 1 */}
         <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden group">
-          <Image src="/images/hero_model.png" alt="Editorial Model" fill className="object-cover group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
+          <Image src="/images/hero_model.png" alt="Editorial Model" fill sizes="33vw" className="object-cover group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
           <div className="absolute inset-x-0 bottom-3 sm:bottom-4 flex justify-center z-10 pointer-events-none select-none">
             <span className="font-display text-sm sm:text-2xl font-extrabold tracking-widest text-white uppercase drop-shadow-md">OPTICS</span>
           </div>
@@ -22,12 +22,12 @@ export default function EditorialLookbook() {
 
         <div className="relative aspect-[4/5] bg-white overflow-hidden flex items-center justify-center p-4 sm:p-8 group">
           <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out">
-            <Image src="/images/sunglasses_3.png" alt="Sleek Round Titanium" fill className="object-contain" />
+            <Image src="/images/sunglasses_3.png" alt="Sleek Round Titanium" fill sizes="33vw" className="object-contain" />
           </div>
         </div>
 
         <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden group">
-          <Image src="/images/tryon_model.png" alt="Editorial Model" fill className="object-cover filter brightness-[0.97] saturate-[0.8] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
+          <Image src="/images/tryon_model.png" alt="Editorial Model" fill sizes="33vw" className="object-cover filter brightness-[0.97] saturate-[0.8] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
           <div className="absolute inset-x-0 bottom-3 sm:bottom-4 flex justify-center z-10 pointer-events-none select-none">
             <span className="font-display text-sm sm:text-2xl font-extrabold tracking-widest text-white/90 uppercase drop-shadow-md">OPTICS</span>
           </div>
@@ -37,35 +37,35 @@ export default function EditorialLookbook() {
         {/* Row 2 */}
         <div className="relative aspect-[4/5] bg-white overflow-hidden flex items-center justify-center p-4 sm:p-8 group">
           <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out">
-            <Image src="/images/sunglasses_1.png" alt="Ridge Titanium Aviator" fill className="object-contain" />
+            <Image src="/images/sunglasses_1.png" alt="Ridge Titanium Aviator" fill sizes="33vw" className="object-contain" />
           </div>
         </div>
 
         <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden group">
-          <Image src="/images/hero_model.png" alt="Editorial Model" fill className="object-cover filter grayscale contrast-[1.15] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
+          <Image src="/images/hero_model.png" alt="Editorial Model" fill sizes="33vw" className="object-cover filter grayscale contrast-[1.15] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
           <div className="absolute inset-0 bg-black/10" />
         </div>
 
         <div className="relative aspect-[4/5] bg-white overflow-hidden flex items-center justify-center p-4 sm:p-8 group">
           <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out">
-            <Image src="/images/sunglasses_4.png" alt="Geometric Tortoiseshell" fill className="object-contain" />
+            <Image src="/images/sunglasses_4.png" alt="Geometric Tortoiseshell" fill sizes="33vw" className="object-contain" />
           </div>
         </div>
 
         {/* Row 3 */}
         <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden group">
-          <Image src="/images/tryon_model.png" alt="Editorial Model" fill className="object-cover filter sepia-[0.25] contrast-[1.05] brightness-[0.95] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
+          <Image src="/images/tryon_model.png" alt="Editorial Model" fill sizes="33vw" className="object-cover filter sepia-[0.25] contrast-[1.05] brightness-[0.95] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
           <div className="absolute inset-0 bg-black/5" />
         </div>
 
         <div className="relative aspect-[4/5] bg-white overflow-hidden flex items-center justify-center p-4 sm:p-8 group">
           <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out">
-            <Image src="/images/sunglasses_2.png" alt="Oversized Acetate" fill className="object-contain" />
+            <Image src="/images/sunglasses_2.png" alt="Oversized Acetate" fill sizes="33vw" className="object-contain" />
           </div>
         </div>
 
         <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden group">
-          <Image src="/images/hero_model.png" alt="Editorial Model" fill className="object-cover filter contrast-[1.1] saturate-[0.9] brightness-[0.98] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
+          <Image src="/images/hero_model.png" alt="Editorial Model" fill sizes="33vw" className="object-cover filter contrast-[1.1] saturate-[0.9] brightness-[0.98] group-hover:scale-105 transition-transform duration-[4000ms] ease-out" />
           <div className="absolute inset-0 bg-black/5" />
         </div>
       </div>

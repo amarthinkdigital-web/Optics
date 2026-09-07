@@ -82,6 +82,7 @@ export default function CartPage() {
                         src={product.image}
                         alt={product.name}
                         fill
+                        sizes="(max-width: 640px) 80px, 96px"
                         className="object-contain p-2 sm:p-3"
                       />
                     </Link>
@@ -91,6 +92,7 @@ export default function CartPage() {
                         src={product.image}
                         alt={product.name}
                         fill
+                        sizes="(max-width: 640px) 80px, 96px"
                         className="object-contain p-2 sm:p-3"
                       />
                     </div>
