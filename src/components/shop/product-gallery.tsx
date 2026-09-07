@@ -51,6 +51,7 @@ export default function ProductGallery({ images, alt }: ProductGalleryProps) {
                 src={img}
                 alt={galleryLabels[idx] ?? `${alt} view ${idx + 1}`}
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-contain"
                 priority={idx === 0}
               />
@@ -103,6 +104,7 @@ export default function ProductGallery({ images, alt }: ProductGalleryProps) {
               src={img}
               alt={galleryLabels[idx] ?? `View ${idx + 1}`}
               fill
+              sizes="(max-width: 768px) 20vw, 10vw"
               className="object-contain p-2"
             />
           </button>
