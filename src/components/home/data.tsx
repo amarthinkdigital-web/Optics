@@ -199,6 +199,60 @@ export function mainOfSub(subId: string): CatalogMainCategory | undefined {
   );
 }
 
+export const ogEditProducts: Product[] = [
+  {
+    id: "og1",
+    name: "Shadow Square",
+    brand: "OPTICS",
+    price: "AED 870",
+    oldPrice: "AED 990",
+    image: "/images/sunglasses_1.png",
+    colors: ["#111111", "#693d25", "#8c8c8c"],
+  },
+  {
+    id: "og2",
+    name: "Classic Aviator",
+    brand: "OPTICS",
+    price: "AED 950",
+    image: "/images/sunglasses_2.png",
+    colors: ["#4f5e50", "#c5a880", "#a89b88"],
+  },
+  {
+    id: "og3",
+    name: "Heritage Round",
+    brand: "OPTICS",
+    price: "AED 1,120",
+    oldPrice: "AED 1,300",
+    image: "/images/sunglasses_3.png",
+    colors: ["#693d25", "#111111", "#c5a880"],
+  },
+  {
+    id: "og4",
+    name: "Monogram Square",
+    brand: "OPTICS",
+    price: "AED 1,050",
+    image: "/images/sunglasses_4.png",
+    colors: ["#111111", "#4f5e50", "#693d25"],
+  },
+  {
+    id: "og5",
+    name: "Metropolitan",
+    brand: "OPTICS",
+    price: "AED 1,240",
+    image: "/images/sunglasses_3.png",
+    colors: ["#111111", "#c5a880", "#8c8c8c"],
+  },
+  {
+    id: "og6",
+    name: "Bold Rectangle",
+    brand: "OPTICS",
+    price: "AED 1,280",
+    oldPrice: "AED 1,450",
+    image: "/images/sunglasses_2.png",
+    colors: ["#4f5e50", "#111111", "#693d25"],
+  },
+];
+
 export const catalogProducts: (Product & { categories: string[] })[] = [
   { id: "c1", name: "Ridge Titanium Aviator", brand: "VERSACE", price: "AED 870", oldPrice: "AED 990", image: "/images/sunglasses_1.png", colors: ["#c5a880","#111"], tag: "New", categories: ["all","clip-on","men"] },
   { id: "c2", name: "Oversized Acetate Signature", brand: "PRADA", price: "AED 950", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#111","#693d25"], tag: "Trending", categories: ["all","clip-on","women"] },
@@ -291,6 +345,7 @@ export interface CartProduct {
 export function getProductInfo(id: string): CartProduct | undefined {
   const found =
     catalogProducts.find((p) => p.id === id) ??
+    ogEditProducts.find((p) => p.id === id) ??
     products.find((p) => p.id === id) ??
     trendingProducts.find((p) => p.id === id);
   if (!found) return undefined;
@@ -328,6 +383,12 @@ export const productDescriptions: Record<string, string> = {
   t3: "New-arrival titanium frames with a featherlight build and precision-crafted hinges for the ultimate in comfort and luxury.",
   t4: "Bold and fearless—Flammo frames deliver high-contrast style with striking lens geometry built for those who own every room.",
   t5: "Prestige-level luxury eyewear with a refined silhouette and premium materials that command attention effortlessly.",
+  og1: "A sharp square silhouette from the OG Edit Blackout campaign—bold lines, dark acetate, and a mood that owns the room.",
+  og2: "The classic aviator reimagined in the OG Edit spirit—clean metal detailing and a timeless, commanding profile.",
+  og3: "Heritage-inspired round frames crafted for the OG Edit drop, blending vintage character with a bolder modern edge.",
+  og4: "Monogram-stamped square frames from the OG Edit collection with understated luxury and precise geometry.",
+  og5: "A metropolitan square frame engineered for city nights and clear statements, part of the OG Edit Blackout line.",
+  og6: "Bold rectangle frames built for maximum presence, finished in the OG Edit's signature dark tones.",
 };
 
 export const galleryLabels = [
@@ -363,6 +424,12 @@ export const productGallery: Record<string, string[]> = {
   t3: ["/images/sunglasses_3.png", "/images/sunglasses_2.png", "/images/tryon_model.png", "/images/sunglasses_4.png", "/images/hero_model.png"],
   t4: ["/images/sunglasses_4.png", "/images/sunglasses_1.png", "/images/tryon_model.png", "/images/sunglasses_3.png", "/images/hero_model.png"],
   t5: ["/images/sunglasses_1.png", "/images/sunglasses_4.png", "/images/tryon_model.png", "/images/sunglasses_2.png", "/images/hero_model.png"],
+  og1: ["/images/sunglasses_1.png", "/images/sunglasses_2.png", "/images/tryon_model.png", "/images/sunglasses_3.png", "/images/hero_model.png"],
+  og2: ["/images/sunglasses_2.png", "/images/sunglasses_1.png", "/images/tryon_model.png", "/images/sunglasses_4.png", "/images/hero_model.png"],
+  og3: ["/images/sunglasses_3.png", "/images/sunglasses_1.png", "/images/tryon_model.png", "/images/sunglasses_2.png", "/images/hero_model.png"],
+  og4: ["/images/sunglasses_4.png", "/images/sunglasses_2.png", "/images/tryon_model.png", "/images/sunglasses_1.png", "/images/hero_model.png"],
+  og5: ["/images/sunglasses_3.png", "/images/sunglasses_4.png", "/images/tryon_model.png", "/images/sunglasses_1.png", "/images/hero_model.png"],
+  og6: ["/images/sunglasses_2.png", "/images/sunglasses_4.png", "/images/tryon_model.png", "/images/sunglasses_1.png", "/images/hero_model.png"],
 };
 
 export const framesOverlay: Record<string, React.ReactNode> = {  aviator: (
