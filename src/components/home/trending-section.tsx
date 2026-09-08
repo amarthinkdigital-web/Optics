@@ -31,13 +31,16 @@ export default function TrendingSection() {
   return (
     <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 flex flex-col gap-4 sm:gap-6">
       <div className="flex items-center justify-between">
-        <div className="flex flex-col gap-1">
-          {/* <span className="text-[15px] font-bold uppercase tracking-widest text-luxury-gold">
-            Weekly Highlights
-          </span> */}
-          <h2 className="font-display text-xl sm:text-2xl font-extrabold tracking-tight text-luxury-black uppercase">
-            Trending This Week
-          </h2>
+        <div className="flex items-center gap-3">
+          <div className="inline-flex items-center gap-2.5 bg-luxury-black text-white pl-5 pr-5 sm:pl-6 sm:pr-7 py-2.5 sm:py-3 rounded-md shadow-lg shadow-black/20">
+            <span className="h-1.5 w-1.5 rounded-full bg-luxury-gold animate-pulse" />
+            <h2 className="font-display text-base sm:text-xl md:text-2xl font-extrabold tracking-tight uppercase">
+              Trending This Week
+            </h2>
+            <span className="hidden sm:block text-[9px] font-bold uppercase tracking-[0.25em] text-luxury-gold/80">
+              Hot Right Now
+            </span>
+          </div>
         </div>
         <div className="hidden sm:flex gap-2">
           <button

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/context/cart-context";
 import { getProductInfo, getProductBySlug, slugify } from "@/components/home/data";
 
-function parseAED(value: string): number {
+function parsePrice(value: string): number {
   const cleaned = value.replace(/[^0-9.]/g, "");
   return parseFloat(cleaned) || 0;
 }
@@ -28,10 +28,10 @@ export default function CartPage() {
     .filter((x): x is NonNullable<typeof x> => x !== null);
 
   const subtotal = items.reduce(
-    (sum, { product, quantity }) => sum + parseAED(product.price) * quantity,
+    (sum, { product, quantity }) => sum + parsePrice(product.price) * quantity,
     0
   );
-  const formattedTotal = `AED ${subtotal.toFixed(2)}`;
+  const formattedTotal = `₹${subtotal.toFixed(2)}`;
 
   return (
     <div className="min-h-[60vh] bg-[#faf9f6]">
@@ -174,7 +174,7 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between text-gray-500">
                   <span>Shipping</span>
-                  <span className="text-xs">Free over AED 1,999</span>
+                  <span className="text-xs">Free over ₹1,999</span>
                 </div>
               </div>
               <div className="border-t border-gray-100 pt-4 flex justify-between">

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 
 interface OgEditCardProps {
   onClick?: () => void;
@@ -15,16 +14,6 @@ export default function OgEditCard({ onClick, className = "" }: OgEditCardProps)
       onClick={onClick}
       className={`group relative w-full rounded-2xl border border-luxury-gold/40 bg-gradient-to-r from-[#141210] via-[#1e1913] to-[#2a2116] p-4 flex items-center justify-between overflow-hidden shadow-xl hover:border-luxury-gold transition-all duration-300 ${className}`}
     >
-      {/* Background sunglasses image accent */}
-      <div className="absolute right-[-10px] top-1/2 -translate-y-1/2 w-28 h-20 pointer-events-none opacity-40 group-hover:opacity-75 group-hover:scale-110 transition-all duration-500">
-        <Image
-          src="/images/sunglasses_1.png"
-          alt="OG Edit Sunglasses"
-          fill
-          sizes="112px"
-          className="object-contain"
-        />
-      </div>
 
       {/* Left Content */}
       <div className="relative z-10 flex items-center gap-3">

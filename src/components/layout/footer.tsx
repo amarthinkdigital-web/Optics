@@ -142,13 +142,19 @@ export default function Footer() {
               </li>
               <li className="flex flex-col gap-1">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Phone</span>
-                <a href="tel:+971501234567" className="text-sm text-gray-400 hover:text-white transition-colors">
-                  +971 50 123 4567
+                <a href="tel:+918956574297" className="text-sm text-gray-400 hover:text-white transition-colors">
+                  +91 89565 74297
                 </a>
               </li>
               <li className="flex flex-col gap-1">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Location</span>
-                <span className="text-sm text-gray-400">Dubai, UAE</span>
+                <span className="text-sm text-gray-400">
+                  Near Kalidas Art Gallery, Shalimar, Nashik, Maharashtra
+                </span>
+              </li>
+              <li className="flex flex-col gap-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">Hours</span>
+                <span className="text-sm text-gray-400">Mon - Sun, 10am - 8pm</span>
               </li>
             </ul>
           </div>

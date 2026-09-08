@@ -72,7 +72,7 @@ const standaloneLinks = [
 /* ─── Component ──────────────────────────────────────── */
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [openCat, setOpenCat] = useState<string | null>("sunglasses");
+  const [openCat, setOpenCat] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const { count: rawCount } = useCart();
   const [cartCount, setCartCount] = useState(0);

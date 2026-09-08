@@ -4,18 +4,32 @@ import InfoPage from "@/components/shop/info-page";
 export const metadata: Metadata = { title: "Contact Us | Optics" };
 
 const contactItems = [
-  { t: "Email", d: "support@optics.com" },
-  { t: "Phone", d: "+971 50 123 4567" },
-  { t: "Location", d: "Dubai, United Arab Emirates" },
-  { t: "Hours", d: "Mon–Sat, 9:00 AM – 6:00 PM GST" },
+  {
+    t: "Phone",
+    d: "+91 89565 74297",
+    href: "tel:+918956574297",
+  },
+  {
+    t: "Location",
+    d: "Near Kalidas Art Gallery, Shalimar, Nashik, Maharashtra",
+  },
+  {
+    t: "Hours",
+    d: "Monday - Sunday, 10am - 8pm",
+  },
+  {
+    t: "Email",
+    d: "support@optics.com",
+    href: "mailto:support@optics.com",
+  },
 ];
 
 export default function ContactPage() {
   return (
     <InfoPage eyebrow="Support" title="Contact Us">
       <p className="text-sm text-gray-600 leading-relaxed font-light">
-        Our concierge team is here to help with orders, styling advice, and
-        everything in between. Reach out any time.
+        Visit our store or reach out any time. Our team is here to help with
+        orders, styling advice, and everything in between.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {contactItems.map((item) => (
@@ -26,7 +40,16 @@ export default function ContactPage() {
             <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
               {item.t}
             </span>
-            <span className="text-sm font-semibold text-luxury-black">{item.d}</span>
+            {"href" in item && item.href ? (
+              <a
+                href={item.href}
+                className="text-sm font-semibold text-luxury-black hover:text-luxury-gold transition-colors"
+              >
+                {item.d}
+              </a>
+            ) : (
+              <span className="text-sm font-semibold text-luxury-black">{item.d}</span>
+            )}
           </div>
         ))}
       </div>
