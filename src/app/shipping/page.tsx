@@ -4,7 +4,7 @@ import InfoPage from "@/components/shop/info-page";
 export const metadata: Metadata = { title: "Shipping & Delivery | Optics" };
 
 const shippingItems = [
-  { t: "Free Shipping", d: "Complimentary express shipping on all orders over AED 1,999." },
+  { t: "Free Shipping", d: "Complimentary express shipping on all orders over ₹1,999." },
   { t: "Standard Delivery", d: "2–4 business days within the UAE and GCC." },
   { t: "Express Delivery", d: "Next-day delivery available for orders placed before 2 PM GST." },
   { t: "International", d: "Worldwide shipping available with duties calculated at checkout." },

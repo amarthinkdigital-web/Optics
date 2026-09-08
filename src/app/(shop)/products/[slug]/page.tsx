@@ -13,6 +13,8 @@ import {
   slugify,
 } from "@/components/home/data";
 
+import ProductFeatureShowcase from "@/components/shop/product-feature-showcase";
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -81,7 +83,7 @@ export default async function ProductPage({ params }: PageProps) {
           <span className="text-luxury-black">{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 pb-8 sm:pb-12">
           {/* Gallery */}
           <div className="relative -mx-4 sm:mx-0">
             {"tag" in product && product.tag && (
@@ -146,37 +148,17 @@ export default async function ProductPage({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Perks */}
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { t: "UV400 Protection", d: "Maximum eye care" },
-                { t: "Lightweight", d: "Featherweight fit" },
-                { t: "Italian Acetate", d: "Hand-finished" },
-                { t: "2 Years Warranty", d: "Quality guaranteed" },
-              ].map((perk) => (
-                <div
-                  key={perk.t}
-                  className="flex items-center gap-3 p-3 rounded-2xl bg-white border border-gray-200/60"
-                >
-                  <span className="h-8 w-8 rounded-full bg-[#eef2f4] flex items-center justify-center text-luxury-black font-bold text-sm shrink-0">
-                    ☼
-                  </span>
-                  <div className="flex flex-col">
-                    <span className="text-xs font-bold text-luxury-black">{perk.t}</span>
-                    <span className="text-[10px] text-gray-500">{perk.d}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
             <ProductBuy productId={product.id} />
 
             <p className="text-[10px] text-gray-400 text-center tracking-widest uppercase">
-              Free shipping on orders over AED 1,999
+              Free shipping on orders over ₹1,999
             </p>
           </div>
         </div>
       </div>
+
+      {/* Dark background showcase section with 2 video cards & feature collage frames */}
+      <ProductFeatureShowcase product={product} />
 
       {/* Dark background related products section above footer */}
       <RelatedProducts items={relatedItems} />

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/context/cart-context";
 import { getProductInfo } from "@/components/home/data";
 
-function parseAED(value: string): number {
+function parsePrice(value: string): number {
   const cleaned = value.replace(/[^0-9.]/g, "");
   return parseFloat(cleaned) || 0;
 }
@@ -24,10 +24,10 @@ export default function CheckoutPage() {
     .filter((x): x is NonNullable<typeof x> => x !== null);
 
   const subtotal = items.reduce(
-    (sum, { product, quantity }) => sum + parseAED(product.price) * quantity,
+    (sum, { product, quantity }) => sum + parsePrice(product.price) * quantity,
     0
   );
-  const formattedTotal = `AED ${subtotal.toFixed(2)}`;
+  const formattedTotal = `₹${subtotal.toFixed(2)}`;
 
   const [form, setForm] = useState({
     fullName: "",

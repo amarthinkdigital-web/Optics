@@ -19,20 +19,25 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
   const router = useRouter();
   const { addItem } = useCart();
   const [activeMain, setActiveMain] = useState<string>("all");
+  const [activeSub, setActiveSub] = useState<string | null>(null);
   const [selectedColors, setSelectedColors] = useState<Record<string, number>>({});
   const [showAll, setShowAll] = useState(false);
 
   const currentMain = catalogCategories.find((m) => m.id === activeMain) ?? null;
   const subRow = currentMain?.subCategories ?? [];
+  const currentSub = subRow.find((s) => s.id === activeSub) ?? null;
 
   const displayCategories = [
     { id: "all", label: "All Eyewear" },
     ...catalogCategories,
   ];
 
-  const filteredCatalog = catalogProducts.filter((p) =>
-    !activeMain || activeMain === "all" ? true : p.categories.includes(activeMain)
-  );
+  const filteredCatalog = catalogProducts.filter((p) => {
+    const matchesMain =
+      !activeMain || activeMain === "all" ? true : p.categories.includes(activeMain);
+    const matchesSub = !activeSub ? true : p.categories.includes(activeSub);
+    return matchesMain && matchesSub;
+  });
   const catalogProductsAll = filteredCatalog;
   const visibleCatalog = showAll ? catalogProductsAll : catalogProductsAll.slice(0, INITIAL_VISIBLE);
 
@@ -41,10 +46,17 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
     router.push("/cart");
   };
 
+  const handleMainSelect = (id: string) => {
+    setActiveMain(id);
+    setActiveSub(null);
+  };
+
   const dynamicHeading =
     activeMain === "all" || !currentMain
       ? "Shop Eyewear"
-      : `Shop ${currentMain.label}`;
+      : currentSub
+        ? `${currentSub.label} · ${currentMain.label}`
+        : `Shop ${currentMain.label}`;
 
   return (
     <>
@@ -59,16 +71,19 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
         }`}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2.5">
+            <span className="text-center text-[9px] font-bold uppercase tracking-[0.3em] text-luxury-gold">
+              Shop by Category
+            </span>
             <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
               {displayCategories.map((cat) => (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveMain(cat.id)}
+                  onClick={() => handleMainSelect(cat.id)}
                   className={`px-3.5 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
                     activeMain === cat.id
-                      ? "bg-luxury-black text-white shadow-md"
-                      : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-luxury-black"
+                      ? "bg-luxury-black text-white shadow-md ring-1 ring-luxury-gold/60"
+                      : "bg-white text-gray-500 border border-gray-200 hover:border-luxury-gold hover:text-luxury-black hover:shadow-sm"
                   }`}
                 >
                   {cat.label}
@@ -77,15 +92,19 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
             </div>
 
             {subRow.length > 0 && (
-              <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none">
+              <div className="flex items-center justify-center gap-2 overflow-x-auto scrollbar-none pt-0.5">
                 {subRow.map((sub) => (
-                  <Link
+                  <button
                     key={sub.id}
-                    href={`/category/${sub.id}?parent=${currentMain?.id ?? ""}`}
-                    className="shrink-0 px-4 py-2 text-[10px] font-semibold uppercase tracking-wider rounded-full border transition-all duration-300 whitespace-nowrap bg-transparent text-gray-500 border-gray-200 hover:border-luxury-gold hover:text-luxury-black"
+                    onClick={() => setActiveSub(activeSub === sub.id ? null : sub.id)}
+                    className={`shrink-0 px-4 py-2 text-[10px] font-bold uppercase tracking-wider rounded-full border transition-all duration-300 whitespace-nowrap ${
+                      activeSub === sub.id
+                        ? "bg-luxury-gold text-white border-luxury-gold shadow-md shadow-luxury-gold/30"
+                        : "bg-white text-gray-500 border-gray-200 hover:border-luxury-gold hover:text-luxury-black hover:bg-luxury-gold/5"
+                    }`}
                   >
                     {sub.label}
-                  </Link>
+                  </button>
                 ))}
               </div>
             )}
