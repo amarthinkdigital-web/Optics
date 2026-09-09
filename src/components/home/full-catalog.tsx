@@ -109,11 +109,7 @@ function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps)
 
       <div
         ref={catTabsRef}
-        className={`w-full z-40 transition-all duration-300 ${
-          stickyBar
-            ? "fixed top-20 left-0 right-0 shadow-lg bg-[#ebd7b5]/95 backdrop-blur-md border-b border-[#cca770]"
-            : "relative bg-gradient-to-r from-[#f5ebda] via-[#ebd7b5] to-[#f5ebda] border-y border-[#cca770]/60 shadow-md"
-        }`}
+        className="w-full z-40 relative bg-gradient-to-r from-[#f5ebda] via-[#ebd7b5] to-[#f5ebda] border-y border-[#cca770]/60 shadow-md"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3.5 sm:py-4">
           <div className="flex flex-col gap-2.5 items-center">
@@ -159,8 +155,6 @@ function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps)
           </div>
         </div>
       </div>
-
-      {stickyBar && <div className="h-[60px]" />}
 
       <section className="mx-auto max-w-7xl w-full px-1 sm:px-6 flex flex-col gap-6 sm:gap-10">
         <div className="flex flex-col gap-2 pt-1">

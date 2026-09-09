@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useRef } from "react";
 import HeroSection from "@/components/home/hero-section";
 import VirtualTryOnSection from "@/components/home/virtual-tryon-section";
 import TrendingSection from "@/components/home/trending-section";
@@ -9,22 +9,8 @@ import VideoSection from "@/components/home/video-section";
 import FullCatalog from "@/components/home/full-catalog";
 
 export default function Home() {
-  const [stickyBar, setStickyBar] = useState(false);
-
   const catalogRef = useRef<HTMLDivElement>(null);
   const catTabsRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = useCallback(() => {
-    if (catalogRef.current) {
-      const top = catalogRef.current.getBoundingClientRect().top;
-      setStickyBar(top <= 64);
-    }
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
 
   return (
     <div className="flex flex-col pb-20 bg-[#faf9f6] w-full max-w-full overflow-x-hidden">
@@ -36,7 +22,7 @@ export default function Home() {
         <FullCatalog
           catalogRef={catalogRef}
           catTabsRef={catTabsRef}
-          stickyBar={stickyBar}
+          stickyBar={false}
         />
       </div>
       <div className="mt-16 md:mt-24" id="favorites">
