@@ -109,25 +109,29 @@ function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps)
 
       <div
         ref={catTabsRef}
-        className="w-full z-40 relative bg-gradient-to-r from-[#f5ebda] via-[#ebd7b5] to-[#f5ebda] border-y border-[#cca770]/60 shadow-md"
+        className="w-full z-40 relative bg-[#fbf4ea] border-y border-[#eddcc4]/60 py-6 sm:py-8 shadow-sm"
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3.5 sm:py-4">
-          <div className="flex flex-col gap-2.5 items-center">
-            {/* Dark Gold Header Label */}
-            <span className="text-center text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.3em] text-[#8b6b3e]">
-              Shop by Category
-            </span>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex flex-col gap-4 sm:gap-5 items-center">
+            {/* Header Label with Lines */}
+            <div className="flex items-center gap-3 w-full max-w-xs sm:max-w-sm justify-center">
+              <span className="h-[1px] flex-1 bg-[#d8c2a8]/60" />
+              <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.25em] text-[#9c7c4f]">
+                Shop by Category
+              </span>
+              <span className="h-[1px] flex-1 bg-[#d8c2a8]/60" />
+            </div>
 
             {/* Category Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               {displayCategories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => handleMainSelect(cat.id)}
-                  className={`px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
+                  className={`px-5 py-2.5 sm:px-6 sm:py-3 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
                     activeMain === cat.id
-                      ? "bg-gradient-to-r from-[#1a1510] via-[#282016] to-[#1a1510] text-[#e8d5bc] border border-[#a88754] shadow-md ring-1 ring-[#a88754]/40 scale-105"
-                      : "bg-white text-gray-700 border border-[#b89660]/40 hover:border-[#8b6b3e] hover:bg-[#faf6f0] hover:text-[#8b6b3e] hover:shadow-sm"
+                      ? "bg-[#1c1917] text-white border border-[#1c1917] shadow-md scale-105"
+                      : "bg-white text-gray-800 border border-gray-100 shadow-sm hover:bg-gray-50 hover:border-gray-300 hover:text-black"
                   }`}
                 >
                   {cat.label}
@@ -136,15 +140,15 @@ function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps)
             </div>
 
             {subRow.length > 0 && (
-              <div className="flex items-center justify-center gap-2 overflow-x-auto scrollbar-none pt-0.5">
+              <div className="flex items-center justify-center gap-2 overflow-x-auto scrollbar-none pt-1">
                 {subRow.map((sub) => (
                   <button
                     key={sub.id}
                     onClick={() => setActiveSub(activeSub === sub.id ? null : sub.id)}
                     className={`shrink-0 px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-full border transition-all duration-300 whitespace-nowrap ${
                       activeSub === sub.id
-                        ? "bg-[#8b6b3e] text-white border-[#8b6b3e] shadow-md shadow-[#8b6b3e]/30"
-                        : "bg-white text-gray-600 border-gray-200 hover:border-[#8b6b3e] hover:text-[#8b6b3e] hover:bg-[#faf6f0]"
+                        ? "bg-[#9c7c4f] text-white border-[#9c7c4f] shadow-md"
+                        : "bg-white text-gray-600 border-gray-200 hover:border-[#9c7c4f] hover:text-[#9c7c4f]"
                     }`}
                   >
                     {sub.label}
@@ -156,24 +160,35 @@ function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps)
         </div>
       </div>
 
-      <section className="mx-auto max-w-7xl w-full px-1 sm:px-6 flex flex-col gap-6 sm:gap-10">
-        <div className="flex flex-col gap-2 pt-1">
-          <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black">
+      <section className="mx-auto max-w-7xl w-full px-4 sm:px-6 flex flex-col gap-6 sm:gap-8 pt-8 sm:pt-12">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-[2rem] sm:text-[2.5rem] font-extrabold tracking-tight text-[#111111] leading-tight">
             {dynamicHeading}
           </h2>
-          <p className="text-xs text-gray-400">
+          <p className="text-xs sm:text-sm text-gray-400 font-normal">
             {catalogProductsAll.length} styles to explore
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-1 sm:gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {visibleCatalog.map((product) => {
             const activeColorIdx = selectedColors[product.id] || 0;
             const productSlug = slugify(product.name);
+
+            // Calculate discount percentage
+            let discountBadge: string | null = null;
+            if (product.oldPrice && product.price) {
+              const p = parseInt(product.price.replace(/[^0-9]/g, ""), 10);
+              const op = parseInt(product.oldPrice.replace(/[^0-9]/g, ""), 10);
+              if (!isNaN(p) && !isNaN(op) && op > p) {
+                discountBadge = `${Math.round(((op - p) / op) * 100)}% OFF`;
+              }
+            }
+
             return (
               <div
                 key={product.id}
-                className="group relative flex flex-col bg-white border border-gray-200/60 rounded-2xl overflow-hidden hover:shadow-xl hover:border-gray-300/40 transition-all duration-300"
+                className="group relative flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gray-200 transition-all duration-300"
               >
                 <Link
                   href={`/products/${productSlug}`}
@@ -182,8 +197,8 @@ function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps)
                   {product.tag && (
                     <span className={`absolute top-4 left-4 z-10 px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full ${
                       product.tag === "Sale" ? "bg-red-500 text-white" :
-                      product.tag === "Trending" ? "bg-luxury-gold text-white" :
-                      "bg-luxury-black text-white"
+                      product.tag === "Trending" ? "bg-[#c5a880] text-white" :
+                      "bg-black text-white"
                     }`}>
                       {product.tag}
                     </span>
@@ -205,43 +220,53 @@ function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps)
                         e.stopPropagation();
                         handleQuickAdd(product.id);
                       }}
-                      className="px-6 py-2.5 bg-luxury-black text-white text-[10px] font-bold tracking-widest uppercase rounded-full shadow-lg hover:bg-luxury-gold transition-colors duration-300 transform active:scale-95 z-20"
+                      className="px-6 py-2.5 bg-black text-white text-[10px] font-bold tracking-widest uppercase rounded-full shadow-lg hover:bg-[#c5a880] transition-colors duration-300 transform active:scale-95 z-20"
                     >
                       Quick Add
                     </button>
                   </div>
                 </Link>
 
-                <div className="flex flex-col gap-3 p-3 sm:p-5 flex-1 justify-between">
-                  <div className="flex flex-col gap-1.5">
-                    <Link href={`/products/${productSlug}`} className="group/title flex flex-col gap-1.5">
+                <div className="flex flex-col gap-3 p-4 sm:p-5 flex-1 justify-between">
+                  <div className="flex flex-col gap-1">
+                    <Link href={`/products/${productSlug}`} className="group/title flex flex-col gap-1">
                       <span className="text-[9px] font-bold tracking-wider text-gray-400 uppercase">{product.brand}</span>
-                      <h3 className="font-display font-medium text-sm text-luxury-black group-hover/title:text-luxury-gold transition-colors duration-300">
+                      <h3 className="font-serif font-medium text-sm text-gray-900 group-hover/title:text-[#c5a880] transition-colors duration-300 line-clamp-1">
                         {product.name}
                       </h3>
                     </Link>
                   </div>
 
-                  <div className="flex items-center justify-between mt-2 pt-3 border-t border-gray-50">
-                    <div className="flex flex-col">
+                  <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-gray-50">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {/* Selling Price FIRST */}
+                      <span className="text-sm sm:text-base font-extrabold text-gray-900">{product.price}</span>
+                      {/* Crossed-out original price SECOND */}
                       {product.oldPrice && (
-                        <span className="text-[10px] text-gray-400 line-through leading-none mb-1">{product.oldPrice}</span>
+                        <span className="text-xs text-gray-400 line-through font-normal">{product.oldPrice}</span>
                       )}
-                      <span className="text-sm font-semibold text-luxury-black">{product.price}</span>
+                      {/* Discount Tag THIRD */}
+                      {discountBadge && (
+                        <span className="text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded">
+                          {discountBadge}
+                        </span>
+                      )}
                     </div>
 
-                    <div className="flex gap-1.5">
-                      {product.colors.map((color, colorIdx) => (
-                        <button
-                          key={color}
-                          onClick={() => setSelectedColors({ ...selectedColors, [product.id]: colorIdx })}
-                          className={`w-3.5 h-3.5 rounded-full border transition-all duration-300 ${
-                            activeColorIdx === colorIdx ? "ring-1 ring-offset-1 ring-luxury-black scale-110" : "border-gray-200"
-                          }`}
-                          style={{ backgroundColor: color }}
-                        />
-                      ))}
-                    </div>
+                    {product.colors && product.colors.length > 0 && (
+                      <div className="flex gap-1.5 items-center pt-1">
+                        {product.colors.map((color, colorIdx) => (
+                          <button
+                            key={color}
+                            onClick={() => setSelectedColors({ ...selectedColors, [product.id]: colorIdx })}
+                            className={`w-3.5 h-3.5 rounded-full border transition-all duration-300 ${
+                              activeColorIdx === colorIdx ? "ring-1 ring-offset-1 ring-black scale-110" : "border-gray-200"
+                            }`}
+                            style={{ backgroundColor: color }}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
