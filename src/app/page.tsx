@@ -42,12 +42,13 @@ export default function Home() {
       <div className="mt-16 md:mt-24" id="favorites">
         <VirtualTryOnSection />
       </div>
+       <div className="mt-16 md:mt-24" id="video">
+        <VideoSection />
+      </div>
       <div className="mt-16 md:mt-24" id="editorial">
         <EditorialLookbook />
       </div>
-      <div className="mt-16 md:mt-24" id="video">
-        <VideoSection />
-      </div>
+     
       {/* <div className="mt-16 md:mt-24" id="promo">
         <LuxuryPromo />
       </div> */}

@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCart } from "@/context/cart-context";
 import { catalogCategories, catalogProducts, slugify } from "./data";
 
@@ -15,13 +15,48 @@ interface FullCatalogProps {
 
 const INITIAL_VISIBLE = 8;
 
-export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps) {
+function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { addItem } = useCart();
   const [activeMain, setActiveMain] = useState<string>("all");
   const [activeSub, setActiveSub] = useState<string | null>(null);
   const [selectedColors, setSelectedColors] = useState<Record<string, number>>({});
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    const cat = searchParams.get("cat");
+    if (cat) {
+      setActiveMain(cat);
+      setActiveSub(null);
+    }
+
+    if (cat || (typeof window !== "undefined" && window.location.hash === "#full-catalog")) {
+      const doScroll = () => {
+        const el = catalogRef.current || document.getElementById("full-catalog");
+        if (el) {
+          const navOffset = 90;
+          const elementPosition = el.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      };
+
+      // Run multiple timers to guarantee scroll after body overflow lock releases
+      const t1 = setTimeout(doScroll, 50);
+      const t2 = setTimeout(doScroll, 200);
+      const t3 = setTimeout(doScroll, 400);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      };
+    }
+  }, [searchParams, catalogRef]);
 
   const currentMain = catalogCategories.find((m) => m.id === activeMain) ?? null;
   const subRow = currentMain?.subCategories ?? [];
@@ -49,6 +84,16 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
   const handleMainSelect = (id: string) => {
     setActiveMain(id);
     setActiveSub(null);
+    const el = catalogRef.current || document.getElementById("full-catalog");
+    if (el) {
+      const navOffset = 100;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   const dynamicHeading =
@@ -66,24 +111,27 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
         ref={catTabsRef}
         className={`w-full z-40 transition-all duration-300 ${
           stickyBar
-            ? "fixed top-20 left-0 right-0 shadow-lg bg-white/95 backdrop-blur-md border-b border-gray-200"
-            : "relative bg-white"
+            ? "fixed top-20 left-0 right-0 shadow-lg bg-[#ebd7b5]/95 backdrop-blur-md border-b border-[#cca770]"
+            : "relative bg-gradient-to-r from-[#f5ebda] via-[#ebd7b5] to-[#f5ebda] border-y border-[#cca770]/60 shadow-md"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4">
-          <div className="flex flex-col gap-2.5">
-            <span className="text-center text-[9px] font-bold uppercase tracking-[0.3em] text-luxury-gold">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3.5 sm:py-4">
+          <div className="flex flex-col gap-2.5 items-center">
+            {/* Dark Gold Header Label */}
+            <span className="text-center text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.3em] text-[#8b6b3e]">
               Shop by Category
             </span>
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+
+            {/* Category Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
               {displayCategories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => handleMainSelect(cat.id)}
-                  className={`px-3.5 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
+                  className={`px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap ${
                     activeMain === cat.id
-                      ? "bg-luxury-black text-white shadow-md ring-1 ring-luxury-gold/60"
-                      : "bg-white text-gray-500 border border-gray-200 hover:border-luxury-gold hover:text-luxury-black hover:shadow-sm"
+                      ? "bg-gradient-to-r from-[#1a1510] via-[#282016] to-[#1a1510] text-[#e8d5bc] border border-[#a88754] shadow-md ring-1 ring-[#a88754]/40 scale-105"
+                      : "bg-white text-gray-700 border border-[#b89660]/40 hover:border-[#8b6b3e] hover:bg-[#faf6f0] hover:text-[#8b6b3e] hover:shadow-sm"
                   }`}
                 >
                   {cat.label}
@@ -97,10 +145,10 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
                   <button
                     key={sub.id}
                     onClick={() => setActiveSub(activeSub === sub.id ? null : sub.id)}
-                    className={`shrink-0 px-4 py-2 text-[10px] font-bold uppercase tracking-wider rounded-full border transition-all duration-300 whitespace-nowrap ${
+                    className={`shrink-0 px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-full border transition-all duration-300 whitespace-nowrap ${
                       activeSub === sub.id
-                        ? "bg-luxury-gold text-white border-luxury-gold shadow-md shadow-luxury-gold/30"
-                        : "bg-white text-gray-500 border-gray-200 hover:border-luxury-gold hover:text-luxury-black hover:bg-luxury-gold/5"
+                        ? "bg-[#8b6b3e] text-white border-[#8b6b3e] shadow-md shadow-[#8b6b3e]/30"
+                        : "bg-white text-gray-600 border-gray-200 hover:border-[#8b6b3e] hover:text-[#8b6b3e] hover:bg-[#faf6f0]"
                     }`}
                   >
                     {sub.label}
@@ -219,5 +267,13 @@ export default function FullCatalog({ catalogRef, catTabsRef, stickyBar }: FullC
         )}
       </section>
     </>
+  );
+}
+
+export default function FullCatalog(props: FullCatalogProps) {
+  return (
+    <Suspense fallback={null}>
+      <CatalogContent {...props} />
+    </Suspense>
   );
 }

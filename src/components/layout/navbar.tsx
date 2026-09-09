@@ -26,8 +26,9 @@ const categories: NavCategory[] = [
     label: "Clip-On Glasses",
     icon: "▢",
     items: [
-      { label: "Men", href: "/category/men" },
-      { label: "Women", href: "/category/women" },
+      { label: "All Clip-On", href: "/category/clip-on" },
+      { label: "Men", href: "/category/men?parent=clip-on" },
+      { label: "Women", href: "/category/women?parent=clip-on" },
     ],
   },
   {
@@ -35,8 +36,9 @@ const categories: NavCategory[] = [
     label: "Eyeglasses",
     icon: "▢",
     items: [
-      { label: "Men", href: "/category/men" },
-      { label: "Women", href: "/category/women" },
+      { label: "All Eyeglasses", href: "/category/eyeglasses" },
+      { label: "Men", href: "/category/men?parent=eyeglasses" },
+      { label: "Women", href: "/category/women?parent=eyeglasses" },
     ],
   },
   {
@@ -44,8 +46,9 @@ const categories: NavCategory[] = [
     label: "Sunglasses",
     icon: "▢",
     items: [
-      { label: "Men", href: "/category/men" },
-      { label: "Women", href: "/category/women" },
+      { label: "All Sunglasses", href: "/category/sunglasses" },
+      { label: "Men", href: "/category/men?parent=sunglasses" },
+      { label: "Women", href: "/category/women?parent=sunglasses" },
     ],
   },
   {
@@ -53,10 +56,10 @@ const categories: NavCategory[] = [
     label: "Accessories",
     icon: "▢",
     items: [
+      { label: "All Accessories", href: "/category/accessories" },
       { label: "Cases", href: "/category/cases" },
       { label: "Cleaning Accessories", href: "/category/cleaning-accessories" },
       { label: "Eyewear Accessories", href: "/category/eyewear-accessories" },
-      { label: "View All", href: "/category/accessories" },
     ],
   },
 ];
@@ -274,18 +277,24 @@ export default function Navbar() {
           <OgEditCard onClick={() => setIsOpen(false)} />
 
           {/* Accordion Categories */}
-          <nav className="flex flex-col border-t border-white/10 pt-2">
+          <nav className="flex flex-col pt-3 gap-3">
             {categories.map((cat, idx) => {
               const isExpanded = openCat === cat.id;
               return (
-                <div key={cat.id} className={idx !== 0 ? "border-t border-white/5" : ""}>
-                  <button
-                    id={`nav-cat-${cat.id}`}
-                    onClick={() => toggleCat(cat.id)}
-                    aria-expanded={isExpanded}
-                    className="w-full flex items-center justify-between py-3.5 group"
-                  >
-                    <div className="flex items-center gap-3">
+                <div 
+                  key={cat.id} 
+                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                    isExpanded 
+                      ? "border-luxury-gold/40 bg-gradient-to-r from-[#141210] via-[#1e1913] to-[#2a2116] shadow-xl" 
+                      : "border-white/10 bg-white/5 hover:border-luxury-gold/30 hover:bg-gradient-to-r hover:from-[#141210] hover:via-[#1e1913] hover:to-[#2a2116]"
+                  }`}
+                >
+                  <div className="w-full flex items-center justify-between p-4 group">
+                    <Link
+                      href={`/category/${cat.id}`}
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-3 flex-1"
+                    >
                       {/* Custom Icons per category */}
                       <span className="text-luxury-gold flex items-center justify-center">
                         {cat.id === "clip-on" && (
@@ -314,33 +323,44 @@ export default function Navbar() {
                       <span className="font-display text-xs font-bold uppercase tracking-[0.15em] text-white group-hover:text-luxury-gold transition-colors duration-200">
                         {cat.label}
                       </span>
-                    </div>
-                    <svg
-                      className={`h-4 w-4 text-gray-400 transition-transform duration-300 ${isExpanded ? "rotate-180 text-luxury-gold" : ""}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleCat(cat.id);
+                      }}
+                      className="p-1 text-gray-400 hover:text-luxury-gold transition-colors"
+                      aria-label="Toggle subcategories"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
+                      <svg
+                        className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? "rotate-180 text-luxury-gold" : ""}`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  </div>
 
                   {/* Sub items */}
                   <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      isExpanded ? "max-h-60 opacity-100 mb-2" : "max-h-0 opacity-0"
+                    className={`overflow-hidden transition-all duration-300 ease-in-out bg-black/20 ${
+                      isExpanded ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <ul className="pl-8 pr-2 flex flex-col gap-1">
+                    <ul className="px-5 pb-4 flex flex-col gap-1">
                       {cat.items.map((item) => (
                         <li key={item.label}>
                           <Link
                             href={item.href}
                             onClick={() => setIsOpen(false)}
-                            className="group/item flex items-center justify-between py-2 text-xs text-gray-300 hover:text-luxury-gold transition-colors duration-200"
+                            className="group/item flex items-center justify-between py-2.5 px-3 rounded-lg text-xs font-medium text-gray-300 hover:text-luxury-gold hover:bg-white/5 transition-colors duration-200"
                           >
-                            <span className="flex items-center gap-2">
-                              <span className="block h-[1px] w-3 bg-luxury-gold/50 group-hover/item:w-5 transition-all duration-300" />
+                            <span className="flex items-center gap-2.5">
+                              <span className="block h-[1px] w-3 bg-luxury-gold/50 group-hover/item:w-5 group-hover/item:bg-luxury-gold transition-all duration-300" />
                               {item.label}
                             </span>
                           </Link>
