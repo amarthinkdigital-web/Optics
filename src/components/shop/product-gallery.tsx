@@ -114,7 +114,7 @@ export default function ProductGallery({ images, alt, colors }: ProductGalleryPr
 
       {/* Colour Options right below small sub-images */}
       {colors && colors.length > 0 && (
-        <div className="flex flex-col gap-2 pt-1 sm:pt-2 px-1 sm:px-0">
+        <div className="flex flex-col gap-2 pt-1 sm:pt-2 px-6 sm:px-0">
           <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
             Colour Options
           </span>
