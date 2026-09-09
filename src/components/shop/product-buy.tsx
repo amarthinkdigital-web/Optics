@@ -56,7 +56,7 @@ export default function ProductBuy({ productId }: ProductBuyProps) {
       </div>
 
       {/* Spacer so content doesn't hide behind the sticky bar on mobile */}
-      <div className="sm:hidden h-20" />
+      <div className="sm:hidden h-2" />
     </>
   );
 }

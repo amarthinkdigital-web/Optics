@@ -73,8 +73,8 @@ export default async function ProductPage({ params }: PageProps) {
     }));
 
   return (
-    <div className="min-h-[70vh] bg-[#faf9f6]">
-      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 py-6 sm:py-8">
+    <div className="bg-[#faf9f6]">
+      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 pt-4 pb-2 sm:py-8">
         <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-6 sm:mb-8 overflow-x-auto scrollbar-none whitespace-nowrap">
           <Link href="/" className="hover:text-luxury-black">Home</Link>
           <span>/</span>
@@ -83,8 +83,8 @@ export default async function ProductPage({ params }: PageProps) {
           <span className="text-luxury-black">{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 pb-8 sm:pb-12">
-          {/* Gallery */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 pb-2 sm:pb-12">
+          {/* Gallery with Colour Options directly below thumbnails */}
           <div className="relative -mx-4 sm:mx-0">
             {"tag" in product && product.tag && (
               <span className={`absolute top-5 left-5 z-20 px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full ${
@@ -104,11 +104,12 @@ export default async function ProductPage({ params }: PageProps) {
             <ProductGallery
               images={productGallery[product.id] ?? [product.image]}
               alt={product.name}
+              colors={colorsList}
             />
           </div>
 
           {/* Details */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5 sm:gap-6">
             <div className="flex flex-col gap-3">
               <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
                 {brandName}
@@ -132,27 +133,7 @@ export default async function ProductPage({ params }: PageProps) {
               {description}
             </p>
 
-            {/* Colors */}
-            <div className="flex flex-col gap-2.5">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                Colour Options
-              </span>
-              <div className="flex gap-2.5">
-                {colorsList.map((color: string) => (
-                  <span
-                    key={color}
-                    className="w-8 h-8 rounded-full border border-gray-200 ring-1 ring-offset-1 ring-luxury-black"
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
-              </div>
-            </div>
-
             <ProductBuy productId={product.id} />
-
-            <p className="text-[10px] text-gray-400 text-center tracking-widest uppercase">
-              Free shipping on orders over ₹1,999
-            </p>
           </div>
         </div>
       </div>
