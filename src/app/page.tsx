@@ -18,7 +18,7 @@ export default function Home() {
       <div className="mt-4 md:mt-12" id="trending">
         <TrendingSection />
       </div>
-      <div className="mt-16 md:mt-24" id="catalog">
+      <div className="mt-4 md:mt-10" id="catalog">
         <FullCatalog
           catalogRef={catalogRef}
           catTabsRef={catTabsRef}
