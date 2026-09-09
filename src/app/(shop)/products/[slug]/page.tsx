@@ -74,7 +74,7 @@ export default async function ProductPage({ params }: PageProps) {
 
   return (
     <div className="bg-[#faf9f6]">
-      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 pt-4 pb-2 sm:py-8">
+      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 pt-4 pb-0 sm:py-8">
         <nav className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-6 sm:mb-8 overflow-x-auto scrollbar-none whitespace-nowrap">
           <Link href="/" className="hover:text-luxury-black">Home</Link>
           <span>/</span>
@@ -83,7 +83,7 @@ export default async function ProductPage({ params }: PageProps) {
           <span className="text-luxury-black">{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 pb-2 sm:pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 pb-0 sm:pb-10">
           {/* Gallery with Colour Options directly below thumbnails */}
           <div className="relative -mx-4 sm:mx-0">
             {"tag" in product && product.tag && (
@@ -95,7 +95,6 @@ export default async function ProductPage({ params }: PageProps) {
                 {product.tag}
               </span>
             )}
-            {/* For trending products we can fallback to tagline as a badge */}
             {!("tag" in product) && "tagline" in product && (
               <span className="absolute top-5 left-5 z-20 px-3 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full bg-luxury-gold text-white">
                 {(product as any).tagline.split("•")[0].trim()}
@@ -109,23 +108,39 @@ export default async function ProductPage({ params }: PageProps) {
           </div>
 
           {/* Details */}
-          <div className="flex flex-col gap-5 sm:gap-6">
-            <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-4 sm:gap-5 px-4 sm:px-0">
+            <div className="flex flex-col gap-2">
               <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
                 {brandName}
               </span>
               <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black">
                 {product.name}
               </h1>
-              <div className="flex items-center gap-3">
-                {"oldPrice" in product && product.oldPrice && (
-                  <span className="text-sm sm:text-base text-gray-400 line-through">
-                    {product.oldPrice}
-                  </span>
-                )}
-                <span className="text-lg sm:text-xl font-bold text-luxury-black">
+
+              {/* Price: selling price first → strikethrough old price → discount badge */}
+              <div className="flex items-center gap-2 flex-wrap mt-1">
+                <span className="text-xl sm:text-2xl font-extrabold text-luxury-black">
                   {product.price}
                 </span>
+                {"oldPrice" in product && product.oldPrice && (
+                  <>
+                    <span className="text-sm text-gray-400 line-through font-normal">
+                      {product.oldPrice}
+                    </span>
+                    {(() => {
+                      const p = parseInt(product.price.replace(/[^0-9]/g, ""), 10);
+                      const op = parseInt((product.oldPrice as string).replace(/[^0-9]/g, ""), 10);
+                      if (!isNaN(p) && !isNaN(op) && op > p) {
+                        return (
+                          <span className="text-xs font-bold text-red-500 bg-red-50 px-2 py-0.5 rounded">
+                            {Math.round(((op - p) / op) * 100)}% OFF
+                          </span>
+                        );
+                      }
+                      return null;
+                    })()}
+                  </>
+                )}
               </div>
             </div>
 
@@ -133,15 +148,22 @@ export default async function ProductPage({ params }: PageProps) {
               {description}
             </p>
 
+            <p className="text-[10px] text-gray-400 tracking-widest uppercase flex items-center gap-1.5">
+              <svg className="w-3.5 h-3.5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              Free shipping on orders over ₹1,999
+            </p>
+
             <ProductBuy productId={product.id} />
           </div>
         </div>
       </div>
 
-      {/* Dark background showcase section with 2 video cards & feature collage frames */}
+      {/* Showcase section – appears directly below, no gap */}
       <ProductFeatureShowcase product={product} />
 
-      {/* Dark background related products section above footer */}
+      {/* Related products */}
       <RelatedProducts items={relatedItems} />
     </div>
   );
