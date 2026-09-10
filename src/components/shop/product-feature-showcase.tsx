@@ -10,7 +10,6 @@ interface ProductFeatureShowcaseProps {
     name: string;
     price: string;
     image: string;
-    brand?: string;
   };
 }
 

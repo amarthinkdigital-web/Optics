@@ -31,7 +31,7 @@ export default function VideoSection({
       videoRef.current.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
       setIsPlaying(true);
     }
   };
@@ -59,7 +59,7 @@ export default function VideoSection({
 
       {/* Video Container - Instagram story style on mobile, cinematic on desktop */}
       <div className="relative flex justify-center">
-        <div className="relative w-full max-w-[310px] aspect-[9/16] sm:w-full sm:max-w-full sm:aspect-auto sm:h-[420px] md:h-[520px] rounded-3xl sm:rounded-3xl overflow-hidden bg-neutral-900 border border-luxury-gold/30 shadow-2xl group">
+        <div className="relative w-full max-w-[330px] aspect-[9/16] sm:w-full sm:max-w-full sm:aspect-auto sm:h-[420px] md:h-[520px] rounded-3xl sm:rounded-3xl overflow-hidden bg-neutral-900 border border-luxury-gold/30 shadow-2xl group">
           {/* Background Poster Fallback Image */}
           <Image
             src={posterUrl}
@@ -90,18 +90,16 @@ export default function VideoSection({
           {/* Ambient Gradient Overlays */}
           <div
             onClick={togglePlay}
-            className={`absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/20 to-black/30 transition-opacity duration-500 cursor-pointer ${
-              isPlaying ? "opacity-30 hover:opacity-70" : "opacity-90"
-            }`}
+            className={`absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/20 to-black/30 transition-opacity duration-500 cursor-pointer ${isPlaying ? "opacity-30 hover:opacity-70" : "opacity-90"
+              }`}
           />
 
           {/* Play / Pause Central Button */}
           <button
             onClick={togglePlay}
             aria-label={isPlaying ? "Pause video" : "Play video"}
-            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-luxury-gold/90 text-luxury-black backdrop-blur-md shadow-[0_0_40px_rgba(197,168,128,0.6)] transition-all duration-300 transform hover:scale-110 hover:bg-white ${
-              isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100 scale-100"
-            }`}
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-luxury-gold/90 text-luxury-black backdrop-blur-md shadow-[0_0_40px_rgba(197,168,128,0.6)] transition-all duration-300 transform hover:scale-110 hover:bg-white ${isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100 scale-100"
+              }`}
           >
             {isPlaying ? (
               <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24">

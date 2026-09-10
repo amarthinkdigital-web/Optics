@@ -7,7 +7,6 @@ import Link from "next/link";
 interface RelatedItem {
   id: string;
   name: string;
-  brand: string;
   price: string;
   oldPrice?: string;
   image: string;
@@ -95,9 +94,6 @@ export default function RelatedProducts({ items }: RelatedProductsProps) {
 
               {/* Info */}
               <div className="flex flex-col gap-1 px-1">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#c5a880]/70">
-                  {item.brand}
-                </span>
                 <h3 className="text-xs font-semibold text-white/90 line-clamp-2 leading-tight group-hover:text-white transition-colors duration-200">
                   {item.name}
                 </h3>

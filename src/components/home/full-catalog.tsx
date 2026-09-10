@@ -230,7 +230,6 @@ function CatalogContent({ catalogRef, catTabsRef, stickyBar }: FullCatalogProps)
                 <div className="flex flex-col gap-3 p-4 sm:p-5 flex-1 justify-between">
                   <div className="flex flex-col gap-1">
                     <Link href={`/products/${productSlug}`} className="group/title flex flex-col gap-1">
-                      <span className="text-[9px] font-bold tracking-wider text-gray-400 uppercase">{product.brand}</span>
                       <h3 className="font-serif font-medium text-sm text-gray-900 group-hover/title:text-[#c5a880] transition-colors duration-300 line-clamp-1">
                         {product.name}
                       </h3>

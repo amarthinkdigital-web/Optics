@@ -100,9 +100,6 @@ export default function CartPage() {
                   <div className="flex flex-1 flex-col justify-between gap-3 min-w-0">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex flex-col min-w-0">
-                        <span className="text-[9px] font-bold tracking-wider text-gray-400 uppercase">
-                          {product.brand}
-                        </span>
                         {detailsHref ? (
                           <Link
                             href={detailsHref}

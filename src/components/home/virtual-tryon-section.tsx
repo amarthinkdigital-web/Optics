@@ -82,7 +82,6 @@ export default function VirtualTryOnSection() {
               {/* Info */}
               <div className="flex flex-col gap-1.5 flex-1 justify-between">
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">{product.brand}</span>
                   <h3 className="font-display font-bold text-xs text-luxury-black line-clamp-2 leading-tight">
                     {product.name}
                   </h3>

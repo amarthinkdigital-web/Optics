@@ -15,23 +15,23 @@ export default function Home() {
   return (
     <div className="flex flex-col pb-20 bg-[#faf9f6] w-full max-w-full overflow-x-hidden">
       <HeroSection />
-      <div className="mt-4 md:mt-12" id="trending">
+      <div className="mt-2 md:mt-8" id="trending">
         <TrendingSection />
       </div>
-      <div className="mt-4 md:mt-10" id="catalog">
+      <div className="mt-2 md:mt-8" id="catalog">
         <FullCatalog
           catalogRef={catalogRef}
           catTabsRef={catTabsRef}
           stickyBar={false}
         />
       </div>
-      <div className="mt-16 md:mt-24" id="favorites">
+      <div className="mt-10 md:mt-16" id="favorites">
         <VirtualTryOnSection />
       </div>
-       <div className="mt-16 md:mt-24" id="video">
+       <div className="mt-10 md:mt-16" id="video">
         <VideoSection />
       </div>
-      <div className="mt-16 md:mt-24" id="editorial">
+      <div className="mt-10 md:mt-16" id="editorial">
         <EditorialLookbook />
       </div>
      

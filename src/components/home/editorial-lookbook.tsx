@@ -21,9 +21,9 @@ export default function EditorialLookbook() {
         <h2 className="font-display text-[1.75rem] sm:text-4xl font-extrabold tracking-tight text-[#111111] uppercase mt-1">
           Follow Us On Instagram
         </h2>
-        <span className="text-sm font-medium tracking-widest text-gray-500 mt-1">
+        {/* <span className="text-sm font-medium tracking-widest text-gray-500 mt-1">
           @optic.gallery
-        </span>
+        </span> */}
       </div>
 
       {/* Grid */}

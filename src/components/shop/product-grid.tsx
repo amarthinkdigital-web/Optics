@@ -128,9 +128,6 @@ export default function ProductGrid({
 
               <div className="flex flex-col gap-3 p-5 flex-1 justify-between">
                 <div className="flex flex-col gap-1.5">
-                  <span className="text-[9px] font-bold tracking-wider text-gray-400 uppercase">
-                    {product.brand}
-                  </span>
                   <h3 className="font-display font-medium text-sm text-luxury-black group-hover:text-luxury-gold transition-colors duration-300">
                     {product.name}
                   </h3>

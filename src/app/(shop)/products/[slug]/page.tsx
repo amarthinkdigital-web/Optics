@@ -55,7 +55,6 @@ export default async function ProductPage({ params }: PageProps) {
   }
 
   const description = productDescriptions[product.id] || "Premium eyewear handcrafted for ultimate clarity, comfort, and luxury style.";
-  const brandName = ("brand" in product && product.brand) ? product.brand : "OPTICS";
   const colorsList = ("colors" in product && product.colors) ? product.colors : ["#111", "#c5a880"];
 
   const relatedItems = allProds
@@ -64,7 +63,6 @@ export default async function ProductPage({ params }: PageProps) {
     .map((p) => ({
       id: p.id,
       name: p.name,
-      brand: ("brand" in p && p.brand) ? p.brand : "OPTICS",
       price: p.price,
       oldPrice: ("oldPrice" in p) ? p.oldPrice : undefined,
       image: p.image,
@@ -103,16 +101,12 @@ export default async function ProductPage({ params }: PageProps) {
             <ProductGallery
               images={productGallery[product.id] ?? [product.image]}
               alt={product.name}
-              colors={colorsList}
             />
           </div>
 
           {/* Details */}
           <div className="flex flex-col gap-4 sm:gap-5 px-4 sm:px-0">
             <div className="flex flex-col gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-luxury-gold">
-                {brandName}
-              </span>
               <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-luxury-black">
                 {product.name}
               </h1>
@@ -144,6 +138,24 @@ export default async function ProductPage({ params }: PageProps) {
               </div>
             </div>
 
+            {/* Colour Options */}
+            {colorsList && colorsList.length > 0 && (
+              <div className="flex flex-col gap-2 pt-1 sm:pt-2">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                  Colour Options
+                </span>
+                <div className="flex items-center gap-2.5">
+                  {colorsList.map((color: string, idx: number) => (
+                    <span
+                      key={color + idx}
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-200 ring-1 ring-offset-1 ring-luxury-black transition-transform hover:scale-110"
+                      style={{ backgroundColor: color }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
             <p className="text-sm text-gray-600 leading-relaxed font-light">
               {description}
             </p>
@@ -152,7 +164,7 @@ export default async function ProductPage({ params }: PageProps) {
               <svg className="w-3.5 h-3.5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Free shipping on orders over ₹1,999
+              Free shipping on orders
             </p>
 
             <ProductBuy productId={product.id} />

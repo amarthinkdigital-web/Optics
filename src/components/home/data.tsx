@@ -1,7 +1,6 @@
 export interface Product {
   id: string;
   name: string;
-  brand: string;
   price: string;
   oldPrice?: string;
   image: string;
@@ -13,7 +12,6 @@ export const products: Product[] = [
   {
     id: "1",
     name: "Ridge Titanium Aviator Frames",
-    brand: "VERSACE",
     price: "₹ 870.00",
     oldPrice: "₹ 990.00",
     image: "/images/sunglasses_1.png",
@@ -23,7 +21,6 @@ export const products: Product[] = [
   {
     id: "2",
     name: "Oversized Acetate Signature Eyewear",
-    brand: "PRADA",
     price: "₹ 950.00",
     image: "/images/sunglasses_2.png",
     colors: ["#111", "#693d25"],
@@ -32,7 +29,6 @@ export const products: Product[] = [
   {
     id: "3",
     name: "Sleek Round Titanium Optical Frames",
-    brand: "GUCCI",
     price: "₹ 1,120.00",
     oldPrice: "₹ 1,300.00",
     image: "/images/sunglasses_3.png",
@@ -41,7 +37,6 @@ export const products: Product[] = [
   {
     id: "4",
     name: "Geometric Tortoiseshell Cat Eye Eyewear",
-    brand: "CELINE",
     price: "₹ 1,050.00",
     image: "/images/sunglasses_4.png",
     colors: ["#693d25", "#111"],
@@ -49,7 +44,6 @@ export const products: Product[] = [
   {
     id: "5",
     name: "Crystal Rimless Titanium Frames",
-    brand: "PRADA",
     price: "₹ 1,380.00",
     oldPrice: "₹ 1,600.00",
     image: "/images/sunglasses_3.png",
@@ -59,7 +53,6 @@ export const products: Product[] = [
   {
     id: "6",
     name: "Angular Rectangle Dark Shield",
-    brand: "DIOR",
     price: "₹ 1,240.00",
     image: "/images/sunglasses_2.png",
     colors: ["#111", "#2c3e50"],
@@ -203,7 +196,6 @@ export const ogEditProducts: Product[] = [
   {
     id: "og1",
     name: "Shadow Square",
-    brand: "OPTICS",
     price: "₹ 870",
     oldPrice: "₹ 990",
     image: "/images/sunglasses_1.png",
@@ -212,7 +204,6 @@ export const ogEditProducts: Product[] = [
   {
     id: "og2",
     name: "Classic Aviator",
-    brand: "OPTICS",
     price: "₹ 950",
     image: "/images/sunglasses_2.png",
     colors: ["#4f5e50", "#c5a880", "#a89b88"],
@@ -220,7 +211,6 @@ export const ogEditProducts: Product[] = [
   {
     id: "og3",
     name: "Heritage Round",
-    brand: "OPTICS",
     price: "₹ 1,120",
     oldPrice: "₹ 1,300",
     image: "/images/sunglasses_3.png",
@@ -229,7 +219,6 @@ export const ogEditProducts: Product[] = [
   {
     id: "og4",
     name: "Monogram Square",
-    brand: "OPTICS",
     price: "₹ 1,050",
     image: "/images/sunglasses_4.png",
     colors: ["#111111", "#4f5e50", "#693d25"],
@@ -237,7 +226,6 @@ export const ogEditProducts: Product[] = [
   {
     id: "og5",
     name: "Metropolitan",
-    brand: "OPTICS",
     price: "₹ 1,240",
     image: "/images/sunglasses_3.png",
     colors: ["#111111", "#c5a880", "#8c8c8c"],
@@ -245,7 +233,6 @@ export const ogEditProducts: Product[] = [
   {
     id: "og6",
     name: "Bold Rectangle",
-    brand: "OPTICS",
     price: "₹ 1,280",
     oldPrice: "₹ 1,450",
     image: "/images/sunglasses_2.png",
@@ -254,18 +241,18 @@ export const ogEditProducts: Product[] = [
 ];
 
 export const catalogProducts: (Product & { categories: string[] })[] = [
-  { id: "c1", name: "Ridge Titanium Aviator", brand: "VERSACE", price: "₹ 870", oldPrice: "₹ 990", image: "/images/sunglasses_1.png", colors: ["#c5a880","#111"], tag: "New", categories: ["all","clip-on","men"] },
-  { id: "c2", name: "Oversized Acetate Signature", brand: "PRADA", price: "₹ 950", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#111","#693d25"], tag: "Trending", categories: ["all","clip-on","women"] },
-  { id: "c3", name: "Sleek Round Titanium Frames", brand: "GUCCI", price: "₹ 1,120", oldPrice: "₹ 1,300", image: "/images/sunglasses_3.png", colors: ["#c5a880","#2c3e50"], tag: undefined, categories: ["all","clip-on","men"] },
-  { id: "c4", name: "Geometric Tortoiseshell Cat Eye", brand: "CELINE", price: "₹ 1,050", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#693d25","#111"], tag: "New", categories: ["all","eyeglasses","women"] },
-  { id: "c5", name: "Sport Wrap Polarized Shield", brand: "VERSACE", price: "₹ 780", oldPrice: "₹ 990", image: "/images/sunglasses_1.png", colors: ["#1a1a2e","#c5a880"], tag: "Sale", categories: ["all","eyeglasses","men"] },
-  { id: "c6", name: "Butterfly Tinted Rimless", brand: "DIOR", price: "₹ 1,240", oldPrice: undefined, image: "/images/sunglasses_3.png", colors: ["#e8c0a0","#4f5e50"], tag: "New", categories: ["all","eyeglasses","women"] },
-  { id: "c7", name: "Classic Wayfarer Black", brand: "RAY-BAN", price: "₹ 650", oldPrice: "₹ 750", image: "/images/sunglasses_2.png", colors: ["#111","#3d3d3d"], tag: undefined, categories: ["all","sunglasses","men"] },
-  { id: "c8", name: "Round Retro Gold Frame", brand: "GUCCI", price: "₹ 890", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#c5a880","#b87333"], tag: "Trending", categories: ["all","sunglasses","women"] },
-  { id: "c9", name: "Classic Aviator Gold Lens", brand: "RAY-BAN", price: "₹ 720", oldPrice: "₹ 850", image: "/images/sunglasses_1.png", colors: ["#c5a880","#2c3e50"], tag: undefined, categories: ["all","sunglasses","men"] },
-  { id: "c10", name: "Havana Wayfarer Tortoise", brand: "RAY-BAN", price: "₹ 690", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#693d25","#111"], tag: "New", categories: ["all","accessories","cases"] },
-  { id: "c11", name: "Crystal Rimless Titanium", brand: "PRADA", price: "₹ 1,380", oldPrice: "₹ 1,600", image: "/images/sunglasses_3.png", colors: ["#e8e8e8","#c5a880"], tag: "Sale", categories: ["all","accessories","cleaning-accessories"] },
-  { id: "c12", name: "Angular Rectangle Dark", brand: "CELINE", price: "₹ 1,010", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#111","#2c3e50"], tag: undefined, categories: ["all","accessories","eyewear-accessories"] },
+  { id: "c1", name: "Ridge Titanium Aviator", price: "₹ 870", oldPrice: "₹ 990", image: "/images/sunglasses_1.png", colors: ["#c5a880","#111"], tag: "New", categories: ["all","clip-on","men"] },
+  { id: "c2", name: "Oversized Acetate Signature", price: "₹ 950", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#111","#693d25"], tag: "Trending", categories: ["all","clip-on","women"] },
+  { id: "c3", name: "Sleek Round Titanium Frames", price: "₹ 1,120", oldPrice: "₹ 1,300", image: "/images/sunglasses_3.png", colors: ["#c5a880","#2c3e50"], tag: undefined, categories: ["all","clip-on","men"] },
+  { id: "c4", name: "Geometric Tortoiseshell Cat Eye", price: "₹ 1,050", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#693d25","#111"], tag: "New", categories: ["all","eyeglasses","women"] },
+  { id: "c5", name: "Sport Wrap Polarized Shield", price: "₹ 780", oldPrice: "₹ 990", image: "/images/sunglasses_1.png", colors: ["#1a1a2e","#c5a880"], tag: "Sale", categories: ["all","eyeglasses","men"] },
+  { id: "c6", name: "Butterfly Tinted Rimless", price: "₹ 1,240", oldPrice: undefined, image: "/images/sunglasses_3.png", colors: ["#e8c0a0","#4f5e50"], tag: "New", categories: ["all","eyeglasses","women"] },
+  { id: "c7", name: "Classic Wayfarer Black", price: "₹ 650", oldPrice: "₹ 750", image: "/images/sunglasses_2.png", colors: ["#111","#3d3d3d"], tag: undefined, categories: ["all","sunglasses","men"] },
+  { id: "c8", name: "Round Retro Gold Frame", price: "₹ 890", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#c5a880","#b87333"], tag: "Trending", categories: ["all","sunglasses","women"] },
+  { id: "c9", name: "Classic Aviator Gold Lens", price: "₹ 720", oldPrice: "₹ 850", image: "/images/sunglasses_1.png", colors: ["#c5a880","#2c3e50"], tag: undefined, categories: ["all","sunglasses","men"] },
+  { id: "c10", name: "Havana Wayfarer Tortoise", price: "₹ 690", oldPrice: undefined, image: "/images/sunglasses_2.png", colors: ["#693d25","#111"], tag: "New", categories: ["all","accessories","cases"] },
+  { id: "c11", name: "Crystal Rimless Titanium", price: "₹ 1,380", oldPrice: "₹ 1,600", image: "/images/sunglasses_3.png", colors: ["#e8e8e8","#c5a880"], tag: "Sale", categories: ["all","accessories","cleaning-accessories"] },
+  { id: "c12", name: "Angular Rectangle Dark", price: "₹ 1,010", oldPrice: undefined, image: "/images/sunglasses_4.png", colors: ["#111","#2c3e50"], tag: undefined, categories: ["all","accessories","eyewear-accessories"] },
 ];
 
 /* Map sidebar / URL slugs to catalog category filter ids */
@@ -336,7 +323,6 @@ export function getProductBySlug(slug: string) {
 export interface CartProduct {
   id: string;
   name: string;
-  brand: string;
   price: string;
   oldPrice?: string;
   image: string;
@@ -352,7 +338,6 @@ export function getProductInfo(id: string): CartProduct | undefined {
   return {
     id: found.id,
     name: found.name,
-    brand: "brand" in found ? found.brand : "Optics",
     price: found.price,
     oldPrice: "oldPrice" in found ? found.oldPrice : undefined,
     image: found.image,
